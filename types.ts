@@ -35,4 +35,45 @@ export interface GrammarQuestion {
   options?: GrammarOption[]; // For multiple-choice
   correctAnswer?: string;    // For input type
   answerExplanation?: string; // For reveal type or extra context
+  wordBank?: string[];       // For gap-fill exercises
+}
+
+export interface MasterclassRow {
+  feature: string;
+  meaning: string;
+  example: string;
+  drill: string;
+}
+
+export interface MasterclassTopic {
+  id: string;
+  title: string;
+  function: string;
+  rows: MasterclassRow[];
+  pronunciation: string;
+}
+
+// --- Speaking Types ---
+
+export interface SpeakingQuestion {
+  text: string;
+}
+
+export interface SpeakingCluster {
+  topic: string;
+  questions: SpeakingQuestion[];
+}
+
+export interface SpeakingCueCard {
+  topic: string;
+  prompts: string[];
+}
+
+export interface SpeakingPartData {
+  id: string;
+  title: string;
+  description: string;
+  type: 'interview' | 'cue-card' | 'discussion';
+  clusters?: SpeakingCluster[]; // For Part 1 & 3
+  cueCards?: SpeakingCueCard[]; // For Part 2
 }

@@ -6,6 +6,8 @@ import { PhaseTwo } from './components/PhaseTwo';
 import { PhaseThree } from './components/PhaseThree';
 import { PhaseFour } from './components/PhaseFour';
 import { GrammarSection } from './components/GrammarSection';
+import { GrammarMasterclass } from './components/GrammarMasterclass';
+import { SpeakingSection } from './components/SpeakingSection';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +20,8 @@ const App: React.FC = () => {
         <PhaseTwo id="phase2" />
         <PhaseThree id="phase3" />
         <PhaseFour id="phase4" />
+        <GrammarMasterclass id="grammar-masterclass" />
+        <SpeakingSection id="speaking" />
         <GrammarSection id="grammar" />
       </main>
       

@@ -96,7 +96,15 @@ const InputCard: React.FC<{ question: GrammarQuestion }> = ({ question }) => {
     e.preventDefault();
     if (!input.trim()) return;
     
-    if (input.trim().toLowerCase() === question.correctAnswer?.toLowerCase()) {
+    // Simple normalization for check
+    const userAnswer = input.trim().toLowerCase();
+    const coreAnswer = question.correctAnswer?.toLowerCase().trim() || "";
+    
+    // Check for exact match or simple plural variations if strict checking is not essential, 
+    // but for this exercise, strictness helps learning. 
+    // However, I'll allow "advocates" for "advocate" just in case, as per previous thought.
+    // Actually, stick to strict core match for now as per key.
+    if (userAnswer === coreAnswer) {
       setStatus('correct');
     } else {
       setStatus('incorrect');
@@ -105,6 +113,19 @@ const InputCard: React.FC<{ question: GrammarQuestion }> = ({ question }) => {
 
   return (
     <div className="space-y-4">
+      {question.wordBank && (
+         <div className="mb-6 bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+           <p className="text-xs text-slate-500 uppercase font-bold tracking-wider mb-3">Word Bank</p>
+           <div className="flex flex-wrap gap-2">
+             {question.wordBank.map((word, i) => (
+               <span key={i} className="px-2 py-1 bg-slate-800 border border-slate-600 rounded text-sky-200 text-xs font-mono">
+                 {word}
+               </span>
+             ))}
+           </div>
+         </div>
+      )}
+
       <h4 className="text-lg text-slate-200 font-medium leading-relaxed">
         {parseText(question.question)}
       </h4>

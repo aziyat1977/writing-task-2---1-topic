@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, BookOpen, Search, GitPullRequest, FileText, PenTool, CheckCircle } from 'lucide-react';
+import { Menu, X, BookOpen, Search, GitPullRequest, FileText, PenTool, CheckCircle, GraduationCap, Mic } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Navigation: React.FC = () => {
@@ -21,6 +21,8 @@ export const Navigation: React.FC = () => {
     { id: 'phase2', label: 'Phase 2: Construction', icon: GitPullRequest },
     { id: 'phase3', label: 'Phase 3: Model Answer', icon: FileText },
     { id: 'phase4', label: 'Phase 4: Lexical Resource', icon: CheckCircle },
+    { id: 'grammar-masterclass', label: 'Grammar Masterclass', icon: GraduationCap },
+    { id: 'speaking', label: 'Speaking Practice', icon: Mic },
     { id: 'grammar', label: 'Grammar & Vocabulary', icon: PenTool },
   ];
 
