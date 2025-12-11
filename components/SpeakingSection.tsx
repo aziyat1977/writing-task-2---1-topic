@@ -43,19 +43,19 @@ const SpeakingWizard: React.FC<WizardProps> = ({ slides, title, subtitle, render
   return (
     <div className="max-w-7xl mx-auto px-6 py-8 h-full flex flex-col">
       {/* Header */}
-      <div className="mb-12 flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-6 gap-4">
+      <div className="mb-12 flex flex-col md:flex-row justify-between items-end border-b border-slate-200 dark:border-white/10 pb-6 gap-4">
         <div>
-           <h2 className="text-3xl md:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-400 mb-2">{title}</h2>
-           <p className="text-slate-400 text-lg font-light">{subtitle}</p>
+           <h2 className="text-3xl md:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-indigo-600 dark:from-sky-400 dark:to-indigo-400 mb-2">{title}</h2>
+           <p className="text-slate-500 dark:text-slate-400 text-lg font-light">{subtitle}</p>
         </div>
         <div className="text-right flex items-baseline gap-2">
-           <span className="text-4xl font-display font-bold text-white">{currentIndex + 1}</span>
-           <span className="text-xl text-slate-500 font-light"> / {slides.length}</span>
+           <span className="text-4xl font-display font-bold text-slate-800 dark:text-white">{currentIndex + 1}</span>
+           <span className="text-xl text-slate-400 dark:text-slate-500 font-light"> / {slides.length}</span>
         </div>
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full h-1 bg-slate-800 rounded-full mb-12 overflow-hidden">
+      <div className="w-full h-1 bg-slate-200 dark:bg-slate-800 rounded-full mb-12 overflow-hidden">
         <motion.div 
           className="h-full bg-gradient-to-r from-sky-500 to-indigo-500"
           initial={{ width: 0 }}
@@ -87,8 +87,8 @@ const SpeakingWizard: React.FC<WizardProps> = ({ slides, title, subtitle, render
             disabled={currentIndex === 0}
             className={`flex items-center gap-3 px-8 py-4 rounded-full font-bold text-lg transition-all ${
                currentIndex === 0 
-               ? 'opacity-30 cursor-not-allowed text-slate-500' 
-               : 'bg-slate-800 hover:bg-slate-700 text-white'
+               ? 'opacity-30 cursor-not-allowed text-slate-400 dark:text-slate-500' 
+               : 'bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-white border border-slate-200 dark:border-transparent'
             }`}
          >
             <ArrowLeft size={24} /> Previous
@@ -99,8 +99,8 @@ const SpeakingWizard: React.FC<WizardProps> = ({ slides, title, subtitle, render
             disabled={currentIndex === slides.length - 1}
             className={`flex items-center gap-3 px-8 py-4 rounded-full font-bold text-lg transition-all ${
                currentIndex === slides.length - 1
-               ? 'opacity-30 cursor-not-allowed text-slate-500 border border-slate-700' 
-               : 'bg-white text-slate-900 hover:bg-sky-50 hover:scale-105 shadow-xl shadow-sky-500/10'
+               ? 'opacity-30 cursor-not-allowed text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700' 
+               : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-sky-50 hover:scale-105 shadow-xl shadow-sky-500/10'
             }`}
          >
             Next Question <ArrowRight size={24} />
@@ -134,17 +134,17 @@ export const SpeakingPart1: React.FC = () => {
       renderSlide={(slide) => (
         <MagicCard className="p-12 md:p-16 flex flex-col items-center justify-center text-center min-h-[500px]" gradientColor="rgba(56, 189, 248, 0.1)">
            <div className="mb-8">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20 text-sm font-bold uppercase tracking-widest">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-100 dark:border-sky-500/20 text-sm font-bold uppercase tracking-widest">
                 <MessageSquare size={14} />
                 {slide.topic}
               </span>
            </div>
            
-           <h3 className="text-4xl md:text-6xl font-serif font-medium text-white leading-tight mb-12">
+           <h3 className="text-4xl md:text-6xl font-serif font-medium text-slate-900 dark:text-white leading-tight mb-12">
              "{slide.text}"
            </h3>
 
-           <div className="w-full max-w-md border-t border-white/10 pt-8">
+           <div className="w-full max-w-md border-t border-slate-200 dark:border-white/10 pt-8">
               <AudioRecorder />
            </div>
         </MagicCard>
@@ -170,22 +170,22 @@ export const SpeakingPart2: React.FC = () => {
       renderSlide={(slide) => (
         <MagicCard className="p-10 md:p-16 min-h-[600px] flex flex-col" gradientColor="rgba(99, 102, 241, 0.15)">
             <div className="flex flex-col md:flex-row items-start gap-6 mb-12">
-               <div className="w-16 h-16 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
+               <div className="w-16 h-16 rounded-2xl bg-indigo-50 dark:bg-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400 shrink-0">
                   <BrainCircuit size={32} />
                </div>
                <div>
-                  <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Cue Card Topic</h4>
-                  <h3 className="text-3xl md:text-5xl font-serif font-medium text-white leading-tight">
+                  <h4 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2">Cue Card Topic</h4>
+                  <h3 className="text-3xl md:text-5xl font-serif font-medium text-slate-900 dark:text-white leading-tight">
                     {slide.topic}
                   </h3>
                </div>
             </div>
 
-            <div className="bg-slate-950/50 rounded-2xl p-8 border border-white/5 mb-12 w-full">
-              <p className="text-xs text-indigo-400 font-bold uppercase tracking-widest mb-6">{data.speaking.say}</p>
+            <div className="bg-slate-50 dark:bg-slate-950/50 rounded-2xl p-8 border border-slate-200 dark:border-white/5 mb-12 w-full">
+              <p className="text-xs text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-widest mb-6">{data.speaking.say}</p>
               <ul className="space-y-4">
                 {slide.prompts.map((prompt: string, i: number) => (
-                   <li key={i} className="flex items-center gap-4 text-xl md:text-2xl text-slate-300 font-light">
+                   <li key={i} className="flex items-center gap-4 text-xl md:text-2xl text-slate-700 dark:text-slate-300 font-light">
                       <span className="w-2 h-2 rounded-full bg-indigo-500 shrink-0" />
                       {prompt}
                    </li>
@@ -225,17 +225,17 @@ export const SpeakingPart3: React.FC = () => {
       renderSlide={(slide) => (
         <MagicCard className="p-12 md:p-16 flex flex-col items-center justify-center text-center min-h-[500px]" gradientColor="rgba(16, 185, 129, 0.1)">
            <div className="mb-8">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-sm font-bold uppercase tracking-widest">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-500/20 text-sm font-bold uppercase tracking-widest">
                 <MessageSquare size={14} />
                 {slide.topic}
               </span>
            </div>
            
-           <h3 className="text-4xl md:text-6xl font-serif font-medium text-white leading-tight mb-12">
+           <h3 className="text-4xl md:text-6xl font-serif font-medium text-slate-900 dark:text-white leading-tight mb-12">
              "{slide.text}"
            </h3>
 
-           <div className="w-full max-w-md border-t border-white/10 pt-8">
+           <div className="w-full max-w-md border-t border-slate-200 dark:border-white/10 pt-8">
               <AudioRecorder />
            </div>
         </MagicCard>

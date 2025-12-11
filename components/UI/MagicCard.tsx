@@ -54,7 +54,7 @@ export const MagicCard: React.FC<MagicCardProps> = ({
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.01 }}
-      className={`relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/40 backdrop-blur-xl shadow-2xl transition-all duration-300 group ${className}`}
+      className={`relative overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl shadow-xl dark:shadow-2xl transition-all duration-300 group ${className}`}
     >
       <div
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
