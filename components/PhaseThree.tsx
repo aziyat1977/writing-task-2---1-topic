@@ -1,40 +1,96 @@
 import React from 'react';
 import { FadeIn } from './FadeIn';
-import { MODEL_ANSWER_PARAGRAPHS } from '../constants';
 import { Quote } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
-export const PhaseThree: React.FC<{ id?: string }> = ({ id }) => {
+const ModelText: React.FC<{ text: string, type: string }> = ({ text, type }) => (
+  <div className="bg-slate-100 text-slate-900 p-8 md:p-10 rounded-xl shadow-2xl relative mb-8">
+    <div className="absolute top-0 right-0 bg-slate-200 px-4 py-1 rounded-bl-xl text-xs font-bold text-slate-500 uppercase tracking-widest">
+      {type}
+    </div>
+    <div className="font-serif text-lg md:text-xl leading-loose">
+       {text}
+    </div>
+  </div>
+);
+
+export const PhaseThreePart1: React.FC = () => {
+  const { data } = useLanguage();
+  const c = data.phase3.part1;
+
   return (
-    <section id={id} className="py-24 px-6 bg-slate-900 border-y border-slate-800">
-      <div className="max-w-4xl mx-auto">
-        <FadeIn>
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-sky-400 mb-4">Phase 3: The Model Answer</h2>
-            <p className="text-slate-400">The consolidated result of the surgical planning.</p>
+    <section className="py-12 px-6 max-w-4xl mx-auto">
+      <FadeIn>
+        <div className="mb-12">
+           <div className="flex items-center gap-3 mb-4">
+             <span className="w-8 h-8 rounded bg-sky-500/10 flex items-center justify-center text-sky-400 text-lg font-bold">{c.id}</span>
+             <h2 className="text-3xl font-bold text-sky-400">{c.title}</h2>
           </div>
-        </FadeIn>
+          <p className="text-slate-400 text-lg">{c.desc}</p>
+        </div>
 
-        <FadeIn delay={0.2}>
-          <div className="bg-slate-100 text-slate-900 p-8 md:p-12 rounded-xl shadow-2xl relative">
-            <div className="absolute top-6 left-6 text-slate-300 pointer-events-none">
-              <Quote size={48} className="opacity-20" />
-            </div>
+        <ModelText text={data.modelParagraphs[0]} type={c.typeIntro} />
+        <ModelText text={data.modelParagraphs[1]} type={c.typeBodyA} />
+      </FadeIn>
+    </section>
+  );
+};
 
-            <article className="font-serif text-lg leading-loose space-y-6 relative z-10">
-              {MODEL_ANSWER_PARAGRAPHS.map((para, idx) => (
-                <p key={idx} className="first-letter:text-5xl first-letter:font-bold first-letter:text-sky-800 first-letter:mr-3 first-letter:float-left">
-                  {para}
-                </p>
-              ))}
-            </article>
-            
-            <div className="mt-8 pt-6 border-t border-slate-300 flex justify-between items-center text-sm font-sans text-slate-500">
-               <span>Band 9.0 Model</span>
-               <span className="italic">Word Count: ~235 words</span>
-            </div>
+export const PhaseThreePart2: React.FC = () => {
+  const { data } = useLanguage();
+  const c = data.phase3.part2;
+
+  return (
+    <section className="py-12 px-6 max-w-4xl mx-auto">
+      <FadeIn>
+         <div className="mb-12">
+           <div className="flex items-center gap-3 mb-4">
+             <span className="w-8 h-8 rounded bg-sky-500/10 flex items-center justify-center text-sky-400 text-lg font-bold">{c.id}</span>
+             <h2 className="text-3xl font-bold text-sky-400">{c.title}</h2>
           </div>
-        </FadeIn>
-      </div>
+          <p className="text-slate-400 text-lg">{c.desc}</p>
+        </div>
+
+        <ModelText text={data.modelParagraphs[2]} type={c.typeBodyB} />
+        
+        <div className="bg-sky-900/20 border border-sky-500/30 p-6 rounded-xl mt-8">
+           <h4 className="text-sky-400 font-bold mb-2">{c.noteTitle}</h4>
+           <p className="text-slate-300 italic">{c.noteQuote}</p>
+           <p className="text-slate-400 text-sm mt-2">{c.noteText}</p>
+        </div>
+      </FadeIn>
+    </section>
+  );
+};
+
+export const PhaseThreePart3: React.FC = () => {
+  const { data } = useLanguage();
+  const c = data.phase3.part3;
+
+  return (
+    <section className="py-12 px-6 max-w-4xl mx-auto">
+      <FadeIn>
+         <div className="mb-12">
+           <div className="flex items-center gap-3 mb-4">
+             <span className="w-8 h-8 rounded bg-sky-500/10 flex items-center justify-center text-sky-400 text-lg font-bold">{c.id}</span>
+             <h2 className="text-3xl font-bold text-sky-400">{c.title}</h2>
+          </div>
+          <p className="text-slate-400 text-lg">{c.desc}</p>
+        </div>
+
+        <ModelText text={data.modelParagraphs[3]} type={c.typeConc} />
+
+        <div className="grid grid-cols-2 gap-4 mt-8">
+           <div className="bg-slate-800 p-6 rounded-lg text-center">
+              <span className="block text-4xl font-bold text-emerald-400 mb-2">9.0</span>
+              <span className="text-slate-500 text-sm uppercase tracking-wider">{c.bandScore}</span>
+           </div>
+           <div className="bg-slate-800 p-6 rounded-lg text-center">
+              <span className="block text-4xl font-bold text-indigo-400 mb-2">~235</span>
+              <span className="text-slate-500 text-sm uppercase tracking-wider">{c.wordCount}</span>
+           </div>
+        </div>
+      </FadeIn>
     </section>
   );
 };

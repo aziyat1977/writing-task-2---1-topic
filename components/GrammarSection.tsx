@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { FadeIn } from './FadeIn';
-import { GRAMMAR_QUESTIONS } from '../constants';
 import { GrammarQuestion } from '../types';
-import { Check, X, Eye, ArrowRight } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { Check, X, Eye } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 // --- Text Parser Utility ---
 const parseText = (text: string, highlightClass = "text-sky-300 font-bold") => {
-  // Regex to match **bold** or ______
   const parts = text.split(/(\*\*.*?\*\*|______)/g);
   return parts.map((part, i) => {
     if (part === '______') {
@@ -91,19 +89,15 @@ const MultipleChoiceCard: React.FC<{ question: GrammarQuestion }> = ({ question 
 const InputCard: React.FC<{ question: GrammarQuestion }> = ({ question }) => {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<'idle' | 'correct' | 'incorrect'>('idle');
+  const { data } = useLanguage();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
     
-    // Simple normalization for check
     const userAnswer = input.trim().toLowerCase();
     const coreAnswer = question.correctAnswer?.toLowerCase().trim() || "";
     
-    // Check for exact match or simple plural variations if strict checking is not essential, 
-    // but for this exercise, strictness helps learning. 
-    // However, I'll allow "advocates" for "advocate" just in case, as per previous thought.
-    // Actually, stick to strict core match for now as per key.
     if (userAnswer === coreAnswer) {
       setStatus('correct');
     } else {
@@ -115,7 +109,7 @@ const InputCard: React.FC<{ question: GrammarQuestion }> = ({ question }) => {
     <div className="space-y-4">
       {question.wordBank && (
          <div className="mb-6 bg-slate-900/40 p-4 rounded-lg border border-slate-700">
-           <p className="text-xs text-slate-500 uppercase font-bold tracking-wider mb-3">Word Bank</p>
+           <p className="text-xs text-slate-500 uppercase font-bold tracking-wider mb-3">{data.grammarPractice.wordBank}</p>
            <div className="flex flex-wrap gap-2">
              {question.wordBank.map((word, i) => (
                <span key={i} className="px-2 py-1 bg-slate-800 border border-slate-600 rounded text-sky-200 text-xs font-mono">
@@ -155,18 +149,18 @@ const InputCard: React.FC<{ question: GrammarQuestion }> = ({ question }) => {
           type="submit"
           className="bg-sky-600 hover:bg-sky-500 text-white px-6 py-2 rounded-lg font-medium transition-colors"
         >
-          Check
+          {data.common.check}
         </button>
       </form>
       
       {status === 'incorrect' && (
         <p className="text-red-400 text-sm flex items-center gap-2 animate-in fade-in slide-in-from-top-1">
-          <X size={14} /> Try again.
+          <X size={14} /> {data.common.tryAgain}
         </p>
       )}
       {status === 'correct' && (
          <p className="text-emerald-400 text-sm flex items-center gap-2 animate-in fade-in slide-in-from-top-1">
-          <Check size={14} /> Correct! The answer is <span className="font-bold">"{question.correctAnswer}"</span>.
+          <Check size={14} /> {data.common.correct} The answer is <span className="font-bold">"{question.correctAnswer}"</span>.
         </p>
       )}
     </div>
@@ -175,6 +169,7 @@ const InputCard: React.FC<{ question: GrammarQuestion }> = ({ question }) => {
 
 const RevealCard: React.FC<{ question: GrammarQuestion }> = ({ question }) => {
   const [isRevealed, setIsRevealed] = useState(false);
+  const { data } = useLanguage();
 
   return (
     <div className="space-y-4">
@@ -188,7 +183,7 @@ const RevealCard: React.FC<{ question: GrammarQuestion }> = ({ question }) => {
             onClick={() => setIsRevealed(true)}
             className="flex items-center gap-2 text-sky-400 hover:text-sky-300 transition-colors text-sm font-bold uppercase tracking-wider border border-sky-500/30 hover:border-sky-500/60 bg-sky-500/10 px-4 py-2 rounded-lg"
           >
-            <Eye size={16} /> Reveal Model Answer
+            <Eye size={16} /> {data.common.reveal}
           </button>
         ) : (
           <div className="bg-emerald-900/20 border border-emerald-500/30 p-4 rounded-lg animate-in fade-in slide-in-from-top-2">
@@ -217,47 +212,36 @@ const UniversalCard: React.FC<{ question: GrammarQuestion }> = ({ question }) =>
   );
 };
 
-export const GrammarSection: React.FC<{ id?: string }> = ({ id }) => {
-  return (
-    <section id={id} className="py-24 px-6 max-w-4xl mx-auto border-t border-slate-800">
-      <FadeIn>
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-sky-400 mb-4 flex items-center gap-3">
-            <span className="w-8 h-8 rounded bg-sky-500/10 flex items-center justify-center text-sky-400 text-lg">5</span>
-            Grammar & Vocabulary
-          </h2>
-          <p className="text-slate-400 text-lg">
-            Test your understanding of the structures used in the model answer.
-          </p>
-        </div>
-      </FadeIn>
+const QuestionSet: React.FC<{ questions: GrammarQuestion[], title: string, subtitle: string }> = ({ questions, title, subtitle }) => (
+  <section className="py-12 px-6 max-w-4xl mx-auto">
+    <FadeIn>
+       <div className="mb-12">
+          <h2 className="text-3xl font-bold text-sky-400 mb-2">{title}</h2>
+          <p className="text-slate-400 text-lg">{subtitle}</p>
+       </div>
+       <div className="space-y-8">
+          {questions.map((q) => (
+             <UniversalCard key={q.id} question={q} />
+          ))}
+       </div>
+    </FadeIn>
+  </section>
+);
 
-      <div className="space-y-8">
-        {GRAMMAR_QUESTIONS.map((q, i) => (
-          <div key={q.id}>
-             {/* Render Section Header if present */}
-             {q.sectionHeader && (
-               <FadeIn delay={0.1} className="mt-16 mb-8">
-                 <div className="border-l-4 border-sky-500 pl-4 py-1">
-                   <h3 className="text-xl font-bold text-slate-100">{q.sectionHeader}</h3>
-                   {q.instruction && <p className="text-slate-400 text-sm mt-1">{q.instruction}</p>}
-                 </div>
-               </FadeIn>
-             )}
-             
-             {/* Render Instruction if present (but not with header) */}
-             {!q.sectionHeader && q.instruction && (
-               <FadeIn delay={0.1} className="mb-4">
-                  <p className="text-slate-400 text-sm italic border-b border-slate-800 pb-2 inline-block">{q.instruction}</p>
-               </FadeIn>
-             )}
+export const GrammarPracticePart1: React.FC = () => {
+  const { data } = useLanguage();
+  const questions = data.grammarQuestions.filter(q => q.id <= 10);
+  return <QuestionSet questions={questions} title={data.grammarPractice.title1} subtitle={data.grammarPractice.sub1} />;
+};
 
-             <FadeIn delay={0.2}>
-               <UniversalCard question={q} />
-             </FadeIn>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
+export const GrammarPracticePart2: React.FC = () => {
+  const { data } = useLanguage();
+  const questions = data.grammarQuestions.filter(q => q.id > 10 && q.id <= 30);
+  return <QuestionSet questions={questions} title={data.grammarPractice.title2} subtitle={data.grammarPractice.sub2} />;
+};
+
+export const GrammarPracticePart3: React.FC = () => {
+  const { data } = useLanguage();
+  const questions = data.grammarQuestions.filter(q => q.id > 30);
+  return <QuestionSet questions={questions} title={data.grammarPractice.title3} subtitle={data.grammarPractice.sub3} />;
 };
