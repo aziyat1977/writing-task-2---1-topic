@@ -1,7 +1,8 @@
 import React from 'react';
 import { FadeIn } from './FadeIn';
 import { PROMPT_TOPIC, PROMPT_TASK } from '../constants';
-import { BookOpen, PenTool } from 'lucide-react';
+import { BookOpen, PenTool, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Hero: React.FC<{ id?: string }> = ({ id }) => {
   return (
@@ -21,9 +22,15 @@ export const Hero: React.FC<{ id?: string }> = ({ id }) => {
           <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">
             Essay Construction
           </h1>
-          <p className="text-xl md:text-2xl text-slate-400 font-light">
+          <p className="text-xl md:text-2xl text-slate-400 font-light mb-8">
             Surgical Breakdown • Band 9 Strategy
           </p>
+          <Link 
+            to="/phase/1" 
+            className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-sky-500/20 transition-all transform hover:-translate-y-1"
+          >
+            Start Class <ArrowRight size={18} />
+          </Link>
         </div>
       </FadeIn>
 

@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
 import { Menu, X, BookOpen, Search, GitPullRequest, FileText, PenTool, CheckCircle, GraduationCap, Mic } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
-    }
-  };
-
   const menuItems = [
-    { id: 'hero', label: 'Overview', icon: BookOpen },
-    { id: 'phase1', label: 'Phase 1: Analysis', icon: Search },
-    { id: 'phase2', label: 'Phase 2: Construction', icon: GitPullRequest },
-    { id: 'phase3', label: 'Phase 3: Model Answer', icon: FileText },
-    { id: 'phase4', label: 'Phase 4: Lexical Resource', icon: CheckCircle },
-    { id: 'grammar-masterclass', label: 'Grammar Masterclass', icon: GraduationCap },
-    { id: 'speaking', label: 'Speaking Practice', icon: Mic },
-    { id: 'grammar', label: 'Grammar & Vocabulary', icon: PenTool },
+    { path: '/', label: 'Overview', icon: BookOpen },
+    { path: '/phase/1', label: 'Phase 1: Analysis', icon: Search },
+    { path: '/phase/2', label: 'Phase 2: Construction', icon: GitPullRequest },
+    { path: '/phase/3', label: 'Phase 3: Model Answer', icon: FileText },
+    { path: '/phase/4', label: 'Phase 4: Lexical Resource', icon: CheckCircle },
+    { path: '/grammar/theory', label: 'Grammar Masterclass', icon: GraduationCap },
+    { path: '/grammar/practice', label: 'Grammar & Vocabulary', icon: PenTool },
+    { path: '/speaking', label: 'Speaking Practice', icon: Mic },
   ];
 
   return (
@@ -63,16 +57,24 @@ export const Navigation: React.FC = () => {
                 </div>
 
                 <nav className="space-y-2">
-                  {menuItems.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => scrollToSection(item.id)}
-                      className="w-full flex items-center gap-4 p-4 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-sky-400 transition-colors text-left"
-                    >
-                      <item.icon size={20} />
-                      <span className="font-medium">{item.label}</span>
-                    </button>
-                  ))}
+                  {menuItems.map((item) => {
+                    const isActive = location.pathname === item.path;
+                    return (
+                      <NavLink
+                        key={item.path}
+                        to={item.path}
+                        onClick={() => setIsOpen(false)}
+                        className={`w-full flex items-center gap-4 p-4 rounded-lg transition-colors text-left ${
+                          isActive 
+                            ? 'bg-sky-500/10 text-sky-400 border border-sky-500/20' 
+                            : 'hover:bg-slate-800 text-slate-400 hover:text-sky-300'
+                        }`}
+                      >
+                        <item.icon size={20} />
+                        <span className="font-medium">{item.label}</span>
+                      </NavLink>
+                    );
+                  })}
                 </nav>
 
                 <div className="mt-12 pt-8 border-t border-slate-800 text-xs text-slate-600">
