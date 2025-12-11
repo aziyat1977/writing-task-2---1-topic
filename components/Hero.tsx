@@ -1,58 +1,69 @@
 import React from 'react';
 import { FadeIn } from './FadeIn';
-import { BookOpen, PenTool, ArrowRight } from 'lucide-react';
+import { BookOpen, PenTool, ArrowRight, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { motion } from 'framer-motion';
 
 export const Hero: React.FC<{ id?: string }> = ({ id }) => {
   const { data } = useLanguage();
   return (
     <section id={id} className="min-h-screen flex flex-col justify-center items-center py-20 px-6 relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-[100px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px]" />
-      </div>
-
+      
       <FadeIn>
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-900/30 border border-sky-500/30 text-sky-400 text-sm font-medium mb-6">
+        <div className="text-center mb-16 relative z-10">
+          <motion.div 
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-slate-900/50 backdrop-blur-md border border-sky-500/30 text-sky-400 text-sm font-bold uppercase tracking-widest mb-8 shadow-xl shadow-sky-900/20"
+          >
             <BookOpen size={16} />
             <span>{data.hero.badge}</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">
+          </motion.div>
+          <h1 className="text-6xl md:text-8xl font-display font-bold mb-8 tracking-tight bg-gradient-to-b from-white via-sky-100 to-sky-300 bg-clip-text text-transparent drop-shadow-2xl">
             {data.hero.title}
           </h1>
-          <p className="text-xl md:text-2xl text-slate-400 font-light mb-8">
+          <p className="text-xl md:text-2xl text-slate-400 font-light mb-12 max-w-2xl mx-auto leading-relaxed">
             {data.hero.subtitle}
           </p>
           <Link 
             to="/phase/1/1" 
-            className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-sky-500/20 transition-all transform hover:-translate-y-1"
+            className="group relative inline-flex items-center gap-3 bg-white text-slate-900 font-bold py-4 px-10 rounded-full text-lg shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] transition-all transform hover:-translate-y-1 hover:scale-105"
           >
-            {data.hero.start} <ArrowRight size={18} />
+            {data.hero.start} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </FadeIn>
 
-      <FadeIn delay={0.2} className="w-full max-w-3xl">
-        <div className="bg-slate-800/50 backdrop-blur-sm border-l-4 border-sky-500 rounded-r-xl p-8 shadow-2xl">
-          <div className="mb-6">
-            <h3 className="text-sky-400 text-sm font-bold uppercase tracking-wider mb-2">{data.hero.topicLabel}</h3>
-            <p className="text-lg md:text-xl text-slate-200 font-serif leading-relaxed">
+      <FadeIn delay={0.2} className="w-full max-w-3xl relative z-10">
+        <motion.div 
+            whileHover={{ scale: 1.01 }}
+            className="relative bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-3xl p-10 shadow-2xl overflow-hidden"
+        >
+          {/* Decorative Elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/20 blur-[60px] rounded-full" />
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/20 blur-[60px] rounded-full" />
+
+          <div className="mb-10 relative z-10">
+            <h3 className="text-sky-400 text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
+                <Star size={12} className="fill-sky-400" />
+                {data.hero.topicLabel}
+            </h3>
+            <p className="text-2xl md:text-3xl text-white font-serif leading-relaxed">
               "{data.hero.topicText}"
             </p>
           </div>
-          <div>
-            <h3 className="text-emerald-400 text-sm font-bold uppercase tracking-wider mb-2 flex items-center gap-2">
-              <PenTool size={16} />
+          <div className="relative z-10 border-t border-white/5 pt-8">
+            <h3 className="text-emerald-400 text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
+              <PenTool size={14} />
               {data.hero.taskLabel}
             </h3>
-            <p className="text-lg text-slate-300 italic">
+            <p className="text-xl text-slate-300 italic font-light">
               "{data.hero.taskText}"
             </p>
           </div>
-        </div>
+        </motion.div>
       </FadeIn>
     </section>
   );
