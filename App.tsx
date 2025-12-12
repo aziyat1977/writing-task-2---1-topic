@@ -7,6 +7,7 @@ import { PhaseOnePart1, PhaseOnePart2A, PhaseOnePart2B, PhaseOnePart3 } from './
 import { PhaseTwoPart1, PhaseTwoPart2A, PhaseTwoPart2B, PhaseTwoPart3 } from './components/PhaseTwo';
 import { PhaseThreePart1A, PhaseThreePart1B, PhaseThreePart2, PhaseThreePart3 } from './components/PhaseThree';
 import { PhaseFourPart1, PhaseFourPart2, PhaseFourPart3 } from './components/PhaseFour';
+import { WritingTaskOne } from './components/WritingTaskOne';
 import { GrammarPracticePart1, GrammarPracticePart2, GrammarPracticePart3 } from './components/GrammarSection';
 import { GrammarTheoryPart1, GrammarTheoryPart2, GrammarTheoryPart3A, GrammarTheoryPart3B } from './components/GrammarMasterclass';
 import { SpeakingPart1, SpeakingPart2, SpeakingPart3 } from './components/SpeakingSection';
@@ -142,10 +143,13 @@ const AnimatedRoutes: React.FC = () => {
         <Route path="/phase/4/2/quiz" element={<PageWrapper progressVal={65} prev={{ path: '/phase/4/2', label: data.phase4.part2.title }} next={{ path: '/phase/4/3', label: data.phase4.part3.title }}><Quiz4_2 /></PageWrapper>} />
 
         <Route path="/phase/4/3" element={<PageWrapper progressVal={68} prev={{ path: '/phase/4/2/quiz', label: "Quiz" }} next={{ path: '/phase/4/3/quiz', label: "Quiz" }}><PhaseFourPart3 /></PageWrapper>} />
-        <Route path="/phase/4/3/quiz" element={<PageWrapper progressVal={71} prev={{ path: '/phase/4/3', label: data.phase4.part3.title }} next={{ path: '/grammar/theory/1', label: data.grammarMaster.title1 }}><Quiz4_3 /></PageWrapper>} />
+        <Route path="/phase/4/3/quiz" element={<PageWrapper progressVal={70} prev={{ path: '/phase/4/3', label: data.phase4.part3.title }} next={{ path: '/task1', label: data.nav.task1 }}><Quiz4_3 /></PageWrapper>} />
+
+        {/* Writing Task 1 */}
+        <Route path="/task1" element={<PageWrapper progressVal={72} prev={{ path: '/phase/4/3/quiz', label: "Quiz" }} next={{ path: '/grammar/theory/1', label: data.grammarMaster.title1 }}><WritingTaskOne /></PageWrapper>} />
 
         {/* Grammar Theory */}
-        <Route path="/grammar/theory/1" element={<PageWrapper progressVal={74} prev={{ path: '/phase/4/3/quiz', label: "Quiz" }} next={{ path: '/grammar/theory/1/quiz', label: "Quiz" }}><GrammarTheoryPart1 /></PageWrapper>} />
+        <Route path="/grammar/theory/1" element={<PageWrapper progressVal={74} prev={{ path: '/task1', label: data.nav.task1 }} next={{ path: '/grammar/theory/1/quiz', label: "Quiz" }}><GrammarTheoryPart1 /></PageWrapper>} />
         <Route path="/grammar/theory/1/quiz" element={<PageWrapper progressVal={77} prev={{ path: '/grammar/theory/1', label: data.grammarMaster.title1 }} next={{ path: '/grammar/theory/2', label: data.grammarMaster.title2 }}><QuizGrammar1 /></PageWrapper>} />
 
         <Route path="/grammar/theory/2" element={<PageWrapper progressVal={80} prev={{ path: '/grammar/theory/1/quiz', label: "Quiz" }} next={{ path: '/grammar/theory/2/quiz', label: "Quiz" }}><GrammarTheoryPart2 /></PageWrapper>} />

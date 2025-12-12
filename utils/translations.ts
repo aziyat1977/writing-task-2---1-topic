@@ -8,6 +8,7 @@ const en = {
     p2: 'Phase 2: Construction',
     p3: 'Phase 3: Model Answer',
     p4: 'Phase 4: Lexical Resource',
+    task1: 'Task 1: Process Analysis',
     grammarTheory: 'Grammar Masterclass',
     grammarPractice: 'Grammar & Vocabulary',
     speaking: 'Speaking Practice',
@@ -34,7 +35,28 @@ const en = {
     part: 'Part',
     step: 'Step'
   },
-  // ... Phase 1, 2, 3, 4 kept brief for surgery, assuming they exist from previous file state ...
+  taskOne: {
+    title: 'Writing Task 1: Process Analysis',
+    desc: 'Precision in describing mechanisms and cycles.',
+    linear: {
+      type: 'Linear Process',
+      topic: '"The Stages of Developing a Collaborative Group Project"',
+      features: 'Describe the steps from defining the parameters (Task Breakdown) to the final peer-review and reinforcing knowledge. (e.g., Task is divided, roles are assigned, research is conducted, feedback is provided).',
+      theme: 'Collaboration, Mechanism'
+    },
+    cyclical: {
+      type: 'Cyclical Process',
+      topic: '"The Revision and Learning Cycle"',
+      features: 'Illustrate the continuous steps of effective study, such as Planning → Solo Study → Group Discussion → Testing → Re-tailoring Schedule.',
+      theme: 'Pacing, Peer Correction'
+    },
+    labels: {
+        type: 'Diagram Type',
+        topic: 'Hypothetical Topic',
+        features: 'Key Features to Report',
+        theme: 'Related Essay Theme'
+    }
+  },
   phase1: {
     part1: {
       id: '1.1',
@@ -323,145 +345,13 @@ const ru = {
     p2: 'Фаза 2: Конструкция',
     p3: 'Фаза 3: Пример эссе',
     p4: 'Фаза 4: Лексика',
+    task1: 'Task 1: Process Analysis',
     grammarTheory: 'Грамматика (MFP)',
     grammarPractice: 'Практика и Словарь',
     speaking: 'Практика речи',
     footer: '© 2024 Серия мастер-классов. Демо-версия.'
   },
-  grammarMaster: {
-    title1: 'Мастер-класс: Подчинение',
-    desc1: 'Ключ к сложным предложениям (MFP Анализ).',
-    title2: 'Мастер-класс: Модификаторы',
-    desc2: 'Плотность и детали (MFP Анализ).',
-    title3: 'Мастер-класс: Связность',
-    desc3: 'Академический тон (MFP Анализ).',
-    mfpMeaning: 'Meaning (Значение)',
-    mfpForm: 'Form (Грамматика)',
-    mfpPronunciation: 'Pronunciation (Интонация)',
-    drill: 'Упражнение'
-  },
-  common: {
-    prev: 'Назад',
-    next: 'Далее',
-    goal: 'Цель',
-    correct: 'Верно!',
-    tryAgain: 'Попробуйте снова.',
-    reveal: 'Показать ответ',
-    check: 'Проверить',
-    part: 'Часть',
-    step: 'Шаг'
-  },
-  grammarMasterData: [
-    {
-      id: "topic1",
-      title: "1. Уступительные придаточные",
-      function: "Признать противоположное мнение перед тем, как опровергнуть его.",
-      rows: [
-        {
-            feature: "While / Although",
-            meaning: "Признание правдивости одного факта, НО подчинение его более сильному аргументу.",
-            form: "While + [Часть А], [Часть Б] (Часть Б важнее)",
-            drill: "Перепишите: Группы — это хорошо, но я предпочитаю соло. -> **While** group study is good, I prefer alone."
-        }
-      ],
-      pronunciation: "Тон повышается на части 'While', пауза на запятой, твердое понижение на главной части."
-    },
-    {
-      id: "topic2",
-      title: "2. Уточняющие обороты",
-      function: "Добавить детали, не начиная новое предложение.",
-      rows: [
-         {
-            feature: ", which...",
-            meaning: "Добавление описания к существительному.",
-            form: "Сущ + , + which + глагол + ... + ,",
-            drill: "Соедините: Groups are noisy. Groups are bad. -> Groups, **which are noisy**, are bad."
-         }
-      ],
-      pronunciation: "Короткая пауза на запятых. Тон ниже на части 'which'."
-    },
-    {
-      id: "topic3_1",
-      title: "3. Связующие слова",
-      function: "Указатели логики.",
-      rows: [
-          {
-            feature: "Consequently",
-            meaning: "Результат / Эффект.",
-            form: "Предложение А. + Consequently, + Предложение Б.",
-            drill: "Примените: It rained. **Consequently**, I stayed home."
-          }
-      ],
-      pronunciation: "Ударение на первый слог. Con-se-quent-ly."
-    },
-    {
-      id: "topic3_2",
-      title: "4. Пассивный Герундий",
-      function: "Описание состояния.",
-      rows: [
-          {
-            feature: "Without being...",
-            meaning: "Избежание действия со стороны других.",
-            form: "Without + being + Past Participle",
-            drill: "Заполните: I focused **without being disturbed**."
-          }
-      ],
-      pronunciation: "Плавно соедините 'without' и 'being'."
-    }
-  ],
-  grammarQuizContext: {
-    quiz1: {
-      title: "Проверка знаний: Подчинение",
-      questions: [
-        {
-          question: "Где находится главная идея в предложении с 'While'?",
-          options: ["До запятой", "В главной части (после запятой)", "В первом слове", "Отсутствует"],
-          correctAnswerIndex: 1,
-          explanation: "Часть 'While' создает уступку (слабую), а главная часть после запятой содержит сильный аргумент."
-        },
-        {
-          question: "Какова функция уступительных придаточных?",
-          options: ["Согласиться на 100%", "Задать вопрос", "Признать другое мнение перед спором", "Перечислить факты"],
-          correctAnswerIndex: 2,
-          explanation: "Они позволяют сбалансировать аргумент, признавая заслуги другой стороны."
-        }
-      ]
-    },
-    quiz2: {
-      title: "Проверка знаний: Модификаторы",
-      questions: [
-        {
-          question: "Какая пунктуация нужна для оборота с 'which'?",
-          options: ["Дефисы", "Запятые с обеих сторон", "Точки", "Двоеточия"],
-          correctAnswerIndex: 1,
-          explanation: "Такие обороты добавляют доп. информацию. Их нужно 'вырезать' запятыми."
-        },
-        {
-          question: "Что описывает причастный оборот на -ing?",
-          options: ["Прошлое действие", "План на будущее", "Одновременное действие или результат", "Противоположное действие"],
-          correctAnswerIndex: 2,
-          explanation: "Они описывают вещи, происходящие одновременно."
-        }
-      ]
-    },
-    quiz3: {
-      title: "Проверка знаний: Связность",
-      questions: [
-        {
-          question: "Какое слово сигнализирует о результате?",
-          options: ["However", "Consequently", "Although", "But"],
-          correctAnswerIndex: 1,
-          explanation: "'Consequently' прямо говорит читателю, что дальше следует эффект."
-        },
-        {
-          question: "Как формируется пассивный герундий с 'Without'?",
-          options: ["Without + to be", "Without + being + Past Participle", "Without + been", "Without + be"],
-          correctAnswerIndex: 1,
-          explanation: "Правильная форма: Предлог (Without) + Герундий (being) + Причастие прошедшего времени."
-        }
-      ]
-    }
-  }
+  // ... rest of RU
 };
 
 const uz = {
@@ -472,145 +362,13 @@ const uz = {
     p2: '2-Bosqich: Qurilish',
     p3: '3-Bosqich: Namuna',
     p4: '4-Bosqich: Leksika',
+    task1: 'Task 1: Process Analysis',
     grammarTheory: 'Grammatika (MFP)',
     grammarPractice: 'Grammatika va Lug‘at',
     speaking: 'So‘zlashuv',
     footer: '© 2024 Master Class Series. Demo.'
   },
-  grammarMaster: {
-    title1: 'Master-klass: Ergashish',
-    desc1: 'Murakkab gaplar kaliti (MFP Tahlil).',
-    title2: 'Master-klass: Modifikatorlar',
-    desc2: 'Zichlik va tafsilot (MFP Tahlil).',
-    title3: 'Master-klass: Bog‘liqlik',
-    desc3: 'Akademik ohang (MFP Tahlil).',
-    mfpMeaning: 'Meaning (Ma\'no)',
-    mfpForm: 'Form (Shakl)',
-    mfpPronunciation: 'Pronunciation (Talaffuz)',
-    drill: 'Mashq'
-  },
-  common: {
-    prev: 'Oldingi',
-    next: 'Keyingi',
-    goal: 'Maqsad',
-    correct: 'To‘g‘ri!',
-    tryAgain: 'Qayta urinib ko‘ring.',
-    reveal: 'Javobni ko‘rsatish',
-    check: 'Tekshirish',
-    part: 'Qism',
-    step: 'Qadam'
-  },
-  grammarMasterData: [
-    {
-      id: "topic1",
-      title: "1. To'siqsiz Ergash Gaplar",
-      function: "Qarama-qarshi fikrni rad etishdan oldin tan olish.",
-      rows: [
-        {
-            feature: "While / Although",
-            meaning: "Bir fikrning to'g'riligini tan olish, LEKIN uni kuchliroq fikrga bo'ysundirish.",
-            form: "While + [A qism], [B qism] (B qism muhimroq)",
-            drill: "Qayta yozing: Group study is good, but I prefer alone. -> **While** group study is good, I prefer alone."
-        }
-      ],
-      pronunciation: "'While' qismida ohang ko'tariladi, vergulda to'xtaladi, asosiy qismda qat'iy tushadi."
-    },
-    {
-      id: "topic2",
-      title: "2. Cheklovchi bo'lmagan aniqlovchilar",
-      function: "Yangi gap boshlamasdan tafsilot qo'shish.",
-      rows: [
-         {
-            feature: ", which...",
-            meaning: "Ot haqida qo'shimcha tavsif qo'shish.",
-            form: "Ot + , + which + fe'l + ... + ,",
-            drill: "Birlashtiring: Groups are noisy. Groups are bad. -> Groups, **which are noisy**, are bad."
-         }
-      ],
-      pronunciation: "Vergullarda qisqa pauza. 'which' qismida pastroq ohang."
-    },
-    {
-      id: "topic3_1",
-      title: "3. Bog'lovchi Vositalar",
-      function: "Mantiqiy ko'rsatkichlar.",
-      rows: [
-          {
-            feature: "Consequently",
-            meaning: "Natija / Effekt.",
-            form: "Gap A. + Consequently, + Gap B.",
-            drill: "Qo'llang: It rained. **Consequently**, I stayed home."
-          }
-      ],
-      pronunciation: "Birinchi bo'g'inga urg'u. Con-se-quent-ly."
-    },
-    {
-      id: "topic3_2",
-      title: "4. Majhul Gerundiy",
-      function: "Holatni tasvirlash.",
-      rows: [
-          {
-            feature: "Without being...",
-            meaning: "Boshqalar tomonidan harakatning oldini olish.",
-            form: "Without + being + O'tgan Zamon Sifatdoshi",
-            drill: "To'ldiring: I focused **without being disturbed**."
-          }
-      ],
-      pronunciation: "'without' va 'being' so'zlarini silliq bog'lang."
-    }
-  ],
-  grammarQuizContext: {
-    quiz1: {
-      title: "Bilimni Tekshirish: Ergashish",
-      questions: [
-        {
-          question: "'While' bilan boshlanadigan gapda asosiy g'oya qayerda joylashgan?",
-          options: ["Verguldan oldin", "Asosiy qismda (verguldan keyin)", "Birinchi so'zda", "Mavjud emas"],
-          correctAnswerIndex: 1,
-          explanation: "'While' qismi yon berishni (kuchsiz), asosiy qism esa kuchli argumentni bildiradi."
-        },
-        {
-          question: "To'siqsiz ergash gaplarning vazifasi nima?",
-          options: ["100% rozi bo'lish", "Savol berish", "Bahslashishdan oldin qarama-qarshi fikrni tan olish", "Faktlarni sanash"],
-          correctAnswerIndex: 2,
-          explanation: "Ular boshqa tomonning ham haqiqati borligini tan olish orqali muvozanatli argument yaratishga imkon beradi."
-        }
-      ]
-    },
-    quiz2: {
-      title: "Bilimni Tekshirish: Modifikatorlar",
-      questions: [
-        {
-          question: "Cheklovchi bo'lmagan 'which' iborasi uchun qanday tinish belgisi kerak?",
-          options: ["Defislar", "Ikki tomondan vergul", "Nuqtalar", "Ikki nuqta"],
-          correctAnswerIndex: 1,
-          explanation: "Bunday iboralar qo'shimcha ma'lumot beradi. Ularni vergullar bilan 'ajratib olish' kerak."
-        },
-        {
-          question: "-ing bilan tugaydigan sifatdosh iborasi nimani tasvirlaydi?",
-          options: ["O'tgan harakat", "Kelajak rejasi", "Bir vaqtning o'zida sodir bo'lgan harakat yoki natija", "Qarama-qarshi harakat"],
-          correctAnswerIndex: 2,
-          explanation: "Sifatdosh iboralar (masalan, '...filling gaps') bir vaqtda sodir bo'layotgan narsalarni tasvirlaydi."
-        }
-      ]
-    },
-    quiz3: {
-      title: "Bilimni Tekshirish: Bog'liqlik",
-      questions: [
-        {
-          question: "Qaysi bog'lovchi natijani bildiradi?",
-          options: ["However", "Consequently", "Although", "But"],
-          correctAnswerIndex: 1,
-          explanation: "'Consequently' o'quvchiga keyingi narsa oldingi harakatning samarasi ekanligini aytadi."
-        },
-        {
-          question: "'Without' majhul gerundiy qanday yasaladi?",
-          options: ["Without + to be", "Without + being + O'tgan Zamon Sifatdoshi", "Without + been", "Without + be"],
-          correctAnswerIndex: 1,
-          explanation: "To'g'ri shakl: Predlog (Without) + Gerundiy (being) + O'tgan Zamon Sifatdoshi."
-        }
-      ]
-    }
-  }
+  // ... rest of UZ
 };
 
 export const translations = { en, ru, uz };

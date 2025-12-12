@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, BookOpen, Search, GitPullRequest, FileText, PenTool, CheckCircle, GraduationCap, Mic, Trophy, Sparkles, Sun, Moon } from 'lucide-react';
+import { Menu, X, BookOpen, Search, GitPullRequest, FileText, PenTool, CheckCircle, GraduationCap, Mic, Trophy, Sparkles, Sun, Moon, LayoutDashboard } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
@@ -28,6 +28,7 @@ export const Navigation: React.FC = () => {
     { path: '/phase/2/1', label: data.nav.p2, icon: GitPullRequest },
     { path: '/phase/3/1', label: data.nav.p3, icon: FileText },
     { path: '/phase/4/1', label: data.nav.p4, icon: CheckCircle },
+    { path: '/task1', label: data.nav.task1, icon: LayoutDashboard }, // Added Task 1
     { path: '/grammar/theory/1', label: data.nav.grammarTheory, icon: GraduationCap },
     { path: '/grammar/practice/1', label: data.nav.grammarPractice, icon: PenTool },
     { path: '/speaking/1', label: data.nav.speaking, icon: Mic },
