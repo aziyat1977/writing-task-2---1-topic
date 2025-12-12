@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Mic, Square, Play, Pause, Download, RefreshCw, Volume2, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -49,9 +50,6 @@ export const AudioRecorder: React.FC = () => {
   const startRecording = async () => {
     setError(null);
     try {
-      // Manual security checks removed to allow browser to handle permissions naturally.
-      // This supports 127.0.0.1, localhost, and secure offline contexts properly.
-
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         throw new Error("Audio recording APIs are not supported in this browser context.");
       }
@@ -85,7 +83,6 @@ export const AudioRecorder: React.FC = () => {
         streamRef.current = null;
       };
 
-      // Start recording with 200ms timeslices to ensure data is captured frequently
       mediaRecorder.start(200);
       setIsRecording(true);
       setAudioUrl(null);
@@ -98,22 +95,10 @@ export const AudioRecorder: React.FC = () => {
 
     } catch (err: any) {
       console.error("Error accessing microphone:", err);
-      
       let errorMessage = "Microphone access error.";
-      
       if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
         errorMessage = "Permission denied. Please allow microphone access in your browser settings.";
-      } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
-        errorMessage = "No microphone found on this device.";
-      } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
-        errorMessage = "Microphone is already in use by another application.";
-      } else if (err.name === 'TypeError' && err.message.includes('secure')) {
-         // Catching browser-thrown insecure context errors if they slip through
-         errorMessage = "Microphone requires HTTPS or localhost.";
-      } else if (err.message) {
-        errorMessage = err.message;
       }
-
       setError(errorMessage);
       setIsRecording(false);
     }
@@ -147,11 +132,11 @@ export const AudioRecorder: React.FC = () => {
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
-  // Determine file extension for download
   const getFileExtension = () => {
     if (mimeType.includes('mp4')) return '.mp4';
     if (mimeType.includes('aac')) return '.aac';
     if (mimeType.includes('ogg')) return '.ogg';
+    if (mimeType.includes('mpeg') || mimeType.includes('mp3')) return '.mp3';
     return '.webm';
   };
 
@@ -204,7 +189,7 @@ export const AudioRecorder: React.FC = () => {
                <div className="p-4 bg-emerald-500/10 rounded-full border border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
                  <Volume2 size={40} />
                </div>
-               <span className="text-sm font-mono uppercase tracking-widest text-emerald-500/80">Recording Saved</span>
+               <span className="text-sm font-mono uppercase tracking-widest text-emerald-500/80">Recording Ready</span>
             </motion.div>
           ) : (
              <div className="flex flex-col items-center text-slate-600">
@@ -222,15 +207,18 @@ export const AudioRecorder: React.FC = () => {
         {/* Controls */}
         <div className="flex items-center gap-8">
           {!isRecording && !audioUrl && (
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={startRecording}
-              className="group relative w-24 h-24 rounded-full bg-slate-800 border-2 border-slate-700 hover:border-red-500/50 hover:bg-slate-800 flex items-center justify-center transition-all shadow-2xl"
-            >
-              <div className="absolute inset-0 bg-red-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
-              <Mic size={40} className="text-slate-400 group-hover:text-red-500 transition-colors" />
-            </motion.button>
+            <div className="flex items-center gap-6">
+                {/* Record Button */}
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={startRecording}
+                  className="group relative w-24 h-24 rounded-full bg-slate-800 border-2 border-slate-700 hover:border-red-500/50 hover:bg-slate-800 flex items-center justify-center transition-all shadow-2xl"
+                >
+                  <div className="absolute inset-0 bg-red-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
+                  <Mic size={40} className="text-slate-400 group-hover:text-red-500 transition-colors" />
+                </motion.button>
+            </div>
           )}
 
           {isRecording && (
@@ -268,11 +256,11 @@ export const AudioRecorder: React.FC = () => {
 
               <motion.a
                 href={audioUrl}
-                download={`speaking-practice-${Date.now()}${getFileExtension()}`}
+                download={`audio-practice-${Date.now()}${getFileExtension()}`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-16 h-16 rounded-full bg-slate-800 border border-slate-700 text-sky-400 hover:text-white hover:bg-sky-500 hover:border-sky-500 flex items-center justify-center transition-all"
-                title="Download Recording"
+                title="Download Audio"
               >
                 <Download size={24} />
               </motion.a>

@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { Menu, X, BookOpen, Search, GitPullRequest, FileText, PenTool, CheckCircle, GraduationCap, Mic, Trophy, Sparkles, Sun, Moon } from 'lucide-react';
+import { Menu, X, BookOpen, Search, GitPullRequest, FileText, PenTool, CheckCircle, GraduationCap, Mic, Trophy, Sparkles, Sun, Moon, Book } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
@@ -30,6 +31,7 @@ export const Navigation: React.FC = () => {
     { path: '/phase/4/1', label: data.nav.p4, icon: CheckCircle },
     { path: '/grammar/theory/1', label: data.nav.grammarTheory, icon: GraduationCap },
     { path: '/grammar/practice/1', label: data.nav.grammarPractice, icon: PenTool },
+    { path: '/reading/1', label: data.nav.reading, icon: Book },
     { path: '/speaking/1', label: data.nav.speaking, icon: Mic },
   ];
 

@@ -1,3 +1,4 @@
+
 export interface LexicalItem {
   collocation: string;
   explanation: string;
@@ -76,4 +77,37 @@ export interface SpeakingPartData {
   type: 'interview' | 'cue-card' | 'discussion';
   clusters?: SpeakingCluster[]; // For Part 1 & 3
   cueCards?: SpeakingCueCard[]; // For Part 2
+}
+
+// --- Reading Types ---
+
+export interface ReadingPassage {
+  title: string;
+  paragraphs: { label: string; text: string }[];
+}
+
+export interface GapFillData {
+  title: string;
+  prompt: string;
+  textWithGaps: string; // Use {26} format for gaps
+  wordBox: string[];
+  answers: { id: number; answer: string; explanation: string }[];
+}
+
+export interface YNNGData {
+  title: string;
+  questions: { id: number; text: string; answer: string; explanation: string }[];
+}
+
+export interface MatchingData {
+  title: string;
+  questions: { id: number; text: string; answer: string; explanation: string }[];
+  endings: { id: string; text: string }[];
+}
+
+export interface ReadingSectionData {
+  passage: ReadingPassage;
+  gapFill: GapFillData;
+  ynng: YNNGData;
+  matching: MatchingData;
 }

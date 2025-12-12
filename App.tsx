@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { HashRouter, Routes, Route, useLocation, Link, Navigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -10,6 +11,7 @@ import { PhaseFourPart1, PhaseFourPart2, PhaseFourPart3 } from './components/Pha
 import { GrammarPracticePart1, GrammarPracticePart2, GrammarPracticePart3 } from './components/GrammarSection';
 import { GrammarTheoryPart1, GrammarTheoryPart2, GrammarTheoryPart3A, GrammarTheoryPart3B } from './components/GrammarMasterclass';
 import { SpeakingPart1, SpeakingPart2, SpeakingPart3 } from './components/SpeakingSection';
+import { ReadingSection } from './components/ReadingSection';
 import { Quiz1_1, Quiz1_2, Quiz1_3, Quiz2_1, Quiz2_2, Quiz2_3, Quiz3_1, Quiz3_2, Quiz3_3, Quiz4_1, Quiz4_2, Quiz4_3, QuizGrammar1, QuizGrammar2, QuizGrammar3 } from './components/Quizzes';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
@@ -87,6 +89,23 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children, prev, next, progres
   );
 };
 
+// Special wrapper for Reading Section to allow full height split view
+const ReadingWrapper: React.FC<{ progressVal: number }> = ({ progressVal }) => {
+    const { setProgress } = useGamification();
+    useEffect(() => setProgress(progressVal), [progressVal, setProgress]);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="w-full h-[calc(var(--app-height)-5rem)] mt-20" // Adjust for fixed header
+        >
+            <ReadingSection />
+        </motion.div>
+    );
+};
+
 const AnimatedRoutes: React.FC = () => {
   const location = useLocation();
   const { data } = useLanguage();
@@ -160,11 +179,14 @@ const AnimatedRoutes: React.FC = () => {
         {/* Grammar Practice */}
         <Route path="/grammar/practice/1" element={<PageWrapper progressVal={92} prev={{ path: '/grammar/theory/3/quiz', label: "Quiz" }} next={{ path: '/grammar/practice/2', label: data.grammarPractice.title2 }}><GrammarPracticePart1 /></PageWrapper>} />
         <Route path="/grammar/practice/2" element={<PageWrapper progressVal={94} prev={{ path: '/grammar/practice/1', label: data.grammarPractice.title1 }} next={{ path: '/grammar/practice/3', label: data.grammarPractice.title3 }}><GrammarPracticePart2 /></PageWrapper>} />
-        <Route path="/grammar/practice/3" element={<PageWrapper progressVal={96} prev={{ path: '/grammar/practice/2', label: data.grammarPractice.title2 }} next={{ path: '/speaking/1', label: data.speaking.part1Title }}><GrammarPracticePart3 /></PageWrapper>} />
+        <Route path="/grammar/practice/3" element={<PageWrapper progressVal={96} prev={{ path: '/grammar/practice/2', label: data.grammarPractice.title2 }} next={{ path: '/reading/1', label: data.nav.reading }}><GrammarPracticePart3 /></PageWrapper>} />
+        
+        {/* Reading */}
+        <Route path="/reading/1" element={<ReadingWrapper progressVal={98} />} />
 
         {/* Speaking */}
-        <Route path="/speaking/1" element={<PageWrapper progressVal={97} prev={{ path: '/grammar/practice/3', label: data.grammarPractice.title3 }} next={{ path: '/speaking/2', label: data.speaking.part2Title }}><SpeakingPart1 /></PageWrapper>} />
-        <Route path="/speaking/2" element={<PageWrapper progressVal={98} prev={{ path: '/speaking/1', label: data.speaking.part1Title }} next={{ path: '/speaking/3', label: data.speaking.part3Title }}><SpeakingPart2 /></PageWrapper>} />
+        <Route path="/speaking/1" element={<PageWrapper progressVal={99} prev={{ path: '/reading/1', label: data.nav.reading }} next={{ path: '/speaking/2', label: data.speaking.part2Title }}><SpeakingPart1 /></PageWrapper>} />
+        <Route path="/speaking/2" element={<PageWrapper progressVal={99} prev={{ path: '/speaking/1', label: data.speaking.part1Title }} next={{ path: '/speaking/3', label: data.speaking.part3Title }}><SpeakingPart2 /></PageWrapper>} />
         <Route path="/speaking/3" element={<PageWrapper progressVal={100} prev={{ path: '/speaking/2', label: data.speaking.part2Title }}><SpeakingPart3 /></PageWrapper>} />
 
         {/* Redirects/Fallbacks */}
@@ -174,6 +196,7 @@ const AnimatedRoutes: React.FC = () => {
         <Route path="/phase/4" element={<Navigate to="/phase/4/1" replace />} />
         <Route path="/grammar/theory" element={<Navigate to="/grammar/theory/1" replace />} />
         <Route path="/grammar/practice" element={<Navigate to="/grammar/practice/1" replace />} />
+        <Route path="/reading" element={<Navigate to="/reading/1" replace />} />
         <Route path="/speaking" element={<Navigate to="/speaking/1" replace />} />
 
       </Routes>

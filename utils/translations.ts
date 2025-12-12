@@ -1,5 +1,6 @@
 
-import { LEXICAL_DATA, MODEL_ANSWER_PARAGRAPHS, SPEAKING_DATA, GRAMMAR_QUESTIONS } from '../constants';
+
+import { LEXICAL_DATA, MODEL_ANSWER_PARAGRAPHS, SPEAKING_DATA, GRAMMAR_QUESTIONS, READING_DATA } from '../constants';
 
 const en = {
   nav: {
@@ -11,6 +12,7 @@ const en = {
     grammarTheory: 'Grammar Masterclass',
     grammarPractice: 'Grammar & Vocabulary',
     speaking: 'Speaking Practice',
+    reading: 'Reading Practice',
     footer: '© 2024 Master Class Series. Educational Demo.'
   },
   hero: {
@@ -195,6 +197,10 @@ const en = {
     part3Desc: 'Two-Way Discussion (4-5 mins)',
     say: 'You should say:'
   },
+  reading: {
+    title: 'Reading Practice',
+    desc: 'Reading Comprehension & Analysis'
+  },
   // Fully Translated Data for MFP
   grammarMasterData: [
     {
@@ -311,7 +317,8 @@ const en = {
   lexicalData: LEXICAL_DATA,
   modelParagraphs: MODEL_ANSWER_PARAGRAPHS,
   grammarQuestions: GRAMMAR_QUESTIONS,
-  speakingData: SPEAKING_DATA
+  speakingData: SPEAKING_DATA,
+  readingData: READING_DATA
 };
 
 const ru = {
@@ -325,6 +332,7 @@ const ru = {
     grammarTheory: 'Грамматика (MFP)',
     grammarPractice: 'Практика и Словарь',
     speaking: 'Практика речи',
+    reading: 'Практика чтения',
     footer: '© 2024 Серия мастер-классов. Демо-версия.'
   },
   // ... rest of RU
@@ -341,6 +349,7 @@ const uz = {
     grammarTheory: 'Grammatika (MFP)',
     grammarPractice: 'Grammatika va Lug‘at',
     speaking: 'So‘zlashuv',
+    reading: 'O‘qish Amaliyoti',
     footer: '© 2024 Master Class Series. Demo.'
   },
   // ... rest of UZ
