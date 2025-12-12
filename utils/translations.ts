@@ -8,7 +8,6 @@ const en = {
     p2: 'Phase 2: Construction',
     p3: 'Phase 3: Model Answer',
     p4: 'Phase 4: Lexical Resource',
-    task1: 'Task 1: Process Analysis',
     grammarTheory: 'Grammar Masterclass',
     grammarPractice: 'Grammar & Vocabulary',
     speaking: 'Speaking Practice',
@@ -34,28 +33,6 @@ const en = {
     check: 'Check',
     part: 'Part',
     step: 'Step'
-  },
-  taskOne: {
-    title: 'Writing Task 1: Process Analysis',
-    desc: 'Precision in describing mechanisms and cycles.',
-    linear: {
-      type: 'Linear Process',
-      topic: '"The Stages of Developing a Collaborative Group Project"',
-      features: 'Describe the steps from defining the parameters (Task Breakdown) to the final peer-review and reinforcing knowledge. (e.g., Task is divided, roles are assigned, research is conducted, feedback is provided).',
-      theme: 'Collaboration, Mechanism'
-    },
-    cyclical: {
-      type: 'Cyclical Process',
-      topic: '"The Revision and Learning Cycle"',
-      features: 'Illustrate the continuous steps of effective study, such as Planning → Solo Study → Group Discussion → Testing → Re-tailoring Schedule.',
-      theme: 'Pacing, Peer Correction'
-    },
-    labels: {
-        type: 'Diagram Type',
-        topic: 'Hypothetical Topic',
-        features: 'Key Features to Report',
-        theme: 'Related Essay Theme'
-    }
   },
   phase1: {
     part1: {
@@ -345,7 +322,6 @@ const ru = {
     p2: 'Фаза 2: Конструкция',
     p3: 'Фаза 3: Пример эссе',
     p4: 'Фаза 4: Лексика',
-    task1: 'Task 1: Process Analysis',
     grammarTheory: 'Грамматика (MFP)',
     grammarPractice: 'Практика и Словарь',
     speaking: 'Практика речи',
@@ -362,7 +338,6 @@ const uz = {
     p2: '2-Bosqich: Qurilish',
     p3: '3-Bosqich: Namuna',
     p4: '4-Bosqich: Leksika',
-    task1: 'Task 1: Process Analysis',
     grammarTheory: 'Grammatika (MFP)',
     grammarPractice: 'Grammatika va Lug‘at',
     speaking: 'So‘zlashuv',
