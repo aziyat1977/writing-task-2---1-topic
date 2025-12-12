@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageQuiz } from './UI/PageQuiz';
 import { FadeIn } from './FadeIn';
+import { useLanguage } from '../context/LanguageContext';
 
 const QuizWrapper: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <section className="py-12 px-6 max-w-4xl mx-auto">
@@ -12,6 +13,9 @@ const QuizWrapper: React.FC<{ title: string; children: React.ReactNode }> = ({ t
     </FadeIn>
   </section>
 );
+
+// --- Phase Quizzes (Currently using hardcoded EN in previous step, kept for stability unless requested to translate too) ---
+// For this task, we focus on the requested GRAMMAR quizzes update.
 
 export const Quiz1_1: React.FC = () => (
   <QuizWrapper title="Knowledge Check: Decoding the Prompt">
@@ -361,89 +365,31 @@ export const Quiz4_3: React.FC = () => (
   </QuizWrapper>
 );
 
-export const QuizGrammar1: React.FC = () => (
-  <QuizWrapper title="Knowledge Check: Subordination">
-    <PageQuiz questions={[
-      {
-        question: "Where is the main idea placed in a sentence starting with 'While'?",
-        options: [
-            "Before the comma",
-            "In the main clause (after the comma)",
-            "In the first word",
-            "It is not in the sentence"
-        ],
-        correctAnswerIndex: 1,
-        explanation: "The 'While' clause creates a concession (the weak point), and the main clause after the comma holds the strong argument."
-      },
-      {
-        question: "What is the function of Concessive clauses?",
-        options: [
-            "To agree 100% with everyone",
-            "To ask a question",
-            "To acknowledge an opposing view before presenting a stronger argument",
-            "To list random facts"
-        ],
-        correctAnswerIndex: 2,
-        explanation: "Concessive clauses allow for a balanced argument by admitting the other side has merit before proving your side is better."
-      }
-    ]} />
-  </QuizWrapper>
-);
+// --- UPDATED GRAMMAR QUIZZES TO USE TRANSLATED CONTEXT ---
 
-export const QuizGrammar2: React.FC = () => (
-  <QuizWrapper title="Knowledge Check: Modifiers">
-    <PageQuiz questions={[
-      {
-        question: "What punctuation is required for a non-restrictive 'which' clause?",
-        options: [
-            "Hyphens",
-            "Commas before and after",
-            "Periods",
-            "Colons"
-        ],
-        correctAnswerIndex: 1,
-        explanation: "Non-restrictive clauses add extra info. You must 'cut' them out of the main sentence with commas on both sides."
-      },
-      {
-        question: "What does a participle phrase ending in -ing usually describe?",
-        options: [
-            "An action in the past",
-            "A future plan",
-            "An action happening concurrently or as a result",
-            "An opposite action"
-        ],
-        correctAnswerIndex: 2,
-        explanation: "Participle phrases (e.g., '...filling gaps') describe things happening at the same time or as a direct consequence."
-      }
-    ]} />
-  </QuizWrapper>
-);
+export const QuizGrammar1: React.FC = () => {
+  const { data } = useLanguage();
+  return (
+    <QuizWrapper title={data.grammarQuizContext.quiz1.title}>
+      <PageQuiz questions={data.grammarQuizContext.quiz1.questions} />
+    </QuizWrapper>
+  );
+};
 
-export const QuizGrammar3: React.FC = () => (
-  <QuizWrapper title="Knowledge Check: Coherence">
-    <PageQuiz questions={[
-      {
-        question: "What linking word is used to signal a result or consequence?",
-        options: [
-            "However",
-            "Consequently",
-            "Although",
-            "But"
-        ],
-        correctAnswerIndex: 1,
-        explanation: "'Consequently' (or 'As a result') explicitly tells the reader that what follows is the effect of the previous action."
-      },
-      {
-        question: "How is the 'Without' passive gerund structure formed?",
-        options: [
-            "Without + to be",
-            "Without + being + Past Participle",
-            "Without + been",
-            "Without + be"
-        ],
-        correctAnswerIndex: 1,
-        explanation: "The correct form is 'Without' (preposition) + 'being' (gerund) + 'held back' (past participle)."
-      }
-    ]} />
-  </QuizWrapper>
-);
+export const QuizGrammar2: React.FC = () => {
+  const { data } = useLanguage();
+  return (
+    <QuizWrapper title={data.grammarQuizContext.quiz2.title}>
+      <PageQuiz questions={data.grammarQuizContext.quiz2.questions} />
+    </QuizWrapper>
+  );
+};
+
+export const QuizGrammar3: React.FC = () => {
+  const { data } = useLanguage();
+  return (
+    <QuizWrapper title={data.grammarQuizContext.quiz3.title}>
+      <PageQuiz questions={data.grammarQuizContext.quiz3.questions} />
+    </QuizWrapper>
+  );
+};

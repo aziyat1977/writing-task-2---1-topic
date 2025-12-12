@@ -15,6 +15,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { GamificationProvider, useGamification } from './context/GamificationContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { ResponsiveProvider, useResponsive } from './context/ResponsiveContext';
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -26,6 +27,7 @@ interface PageWrapperProps {
 const PageWrapper: React.FC<PageWrapperProps> = ({ children, prev, next, progressVal }) => {
   const { data } = useLanguage();
   const { setProgress } = useGamification();
+  const { isCompact } = useResponsive(); // Use responsive context to adjust padding/layout if needed
 
   useEffect(() => {
     setProgress(progressVal);
@@ -37,27 +39,32 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children, prev, next, progres
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 1.02 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="h-screen w-full pt-20 flex flex-col relative overflow-hidden"
+      className="w-full flex flex-col relative overflow-hidden"
+      style={{ height: 'var(--app-height)' }} // Ultra-precise height matching viewport
     >
-      {/* Main Content Area - Centered & Scrollable internally if absolutely needed, but goal is fit */}
-      <div className="flex-grow w-full max-w-7xl mx-auto px-4 md:px-6 flex flex-col justify-center items-center overflow-hidden">
-         <div className="w-full max-h-full overflow-y-auto no-scrollbar py-2 flex flex-col items-center justify-center"> 
-            {children}
+      {/* Main Content Area - Flexible height with internal scroll */}
+      <div className="flex-1 w-full max-w-[1920px] mx-auto min-h-0 flex flex-col pt-20">
+         <div 
+           className={`h-full overflow-y-auto custom-scroll flex flex-col items-center w-full ${isCompact ? 'px-3' : 'px-6'}`}
+         > 
+            <div className="w-full max-w-7xl mx-auto py-4 md:py-8 flex flex-col items-center justify-center min-h-full">
+               {children}
+            </div>
          </div>
       </div>
       
-      {/* Compact Pagination Footer */}
+      {/* Compact Pagination Footer - Adjusts visibility based on available space */}
       {(prev || next) && (
-        <div className="w-full max-w-7xl mx-auto px-6 py-4 shrink-0 flex justify-between items-center z-10">
+        <div className="w-full max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 shrink-0 flex justify-between items-center z-10 bg-gradient-to-t from-slate-50 to-transparent dark:from-slate-950 dark:to-transparent">
             {prev ? (
               <Link 
                 to={prev.path} 
-                className="group flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all px-4 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5"
+                className="group flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all px-3 py-2 md:px-4 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 active:scale-95"
               >
                 <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform text-sky-500" />
                 <span className="flex flex-col items-start">
-                  <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{data.common.prev}</span>
-                  <span className="font-display font-semibold text-sm truncate max-w-[120px] md:max-w-xs">{prev.label}</span>
+                  <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest hidden xs:block">{data.common.prev}</span>
+                  <span className="font-display font-semibold text-xs md:text-sm truncate max-w-[100px] md:max-w-xs">{prev.label}</span>
                 </span>
               </Link>
             ) : <div />}
@@ -65,11 +72,11 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children, prev, next, progres
             {next ? (
               <Link 
                 to={next.path} 
-                className="group flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all px-4 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-right"
+                className="group flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all px-3 py-2 md:px-4 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-right active:scale-95"
               >
                 <span className="flex flex-col items-end">
-                  <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{data.common.next}</span>
-                  <span className="font-display font-semibold text-sm truncate max-w-[120px] md:max-w-xs">{next.label}</span>
+                  <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest hidden xs:block">{data.common.next}</span>
+                  <span className="font-display font-semibold text-xs md:text-sm truncate max-w-[100px] md:max-w-xs">{next.label}</span>
                 </span>
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform text-emerald-500" />
               </Link>
@@ -145,7 +152,7 @@ const AnimatedRoutes: React.FC = () => {
         <Route path="/grammar/theory/2/quiz" element={<PageWrapper progressVal={83} prev={{ path: '/grammar/theory/2', label: data.grammarMaster.title2 }} next={{ path: '/grammar/theory/3/1', label: data.grammarMaster.title3 + " (1)" }}><QuizGrammar2 /></PageWrapper>} />
 
         {/* Split Theory 3 */}
-        <Route path="/grammar/theory/3/1" element={<PageWrapper progressVal={86} prev={{ path: '/grammar/theory/2/quiz', label: "Quiz" }} next={{ path: '/grammar/theory/3/2', label: data.grammarMaster.title3 + " (2)" }}><GrammarTheoryPart3A /></PageWrapper>} />
+        <Route path="/grammar/theory/3/1" element={<PageWrapper progressVal={86} prev={{ path: '/grammar/theory/2/quiz', label: "Quiz" }} next={{ path: '/grammar/theory/3/1', label: "Part 1" }}><GrammarTheoryPart3A /></PageWrapper>} />
         <Route path="/grammar/theory/3/2" element={<PageWrapper progressVal={88} prev={{ path: '/grammar/theory/3/1', label: "Part 1" }} next={{ path: '/grammar/theory/3/quiz', label: "Quiz" }}><GrammarTheoryPart3B /></PageWrapper>} />
 
         <Route path="/grammar/theory/3/quiz" element={<PageWrapper progressVal={89} prev={{ path: '/grammar/theory/3/2', label: data.grammarMaster.title3 }} next={{ path: '/grammar/practice/1', label: data.grammarPractice.title1 }}><QuizGrammar3 /></PageWrapper>} />
@@ -177,13 +184,15 @@ const AnimatedRoutes: React.FC = () => {
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <GamificationProvider>
-        <LanguageProvider>
-          <HashRouter>
-            <AppContent />
-          </HashRouter>
-        </LanguageProvider>
-      </GamificationProvider>
+      <ResponsiveProvider>
+        <GamificationProvider>
+          <LanguageProvider>
+            <HashRouter>
+              <AppContent />
+            </HashRouter>
+          </LanguageProvider>
+        </GamificationProvider>
+      </ResponsiveProvider>
     </ThemeProvider>
   );
 };
@@ -191,9 +200,9 @@ const App: React.FC = () => {
 const AppContent: React.FC = () => {
   const { data } = useLanguage();
   return (
-    <div className="bg-slate-50 dark:bg-[#020617] min-h-screen text-slate-800 dark:text-slate-200 selection:bg-sky-500/30 font-sans overflow-hidden transition-colors duration-500">
+    <div className="bg-slate-50 dark:bg-[#020617] min-h-screen text-slate-800 dark:text-slate-200 selection:bg-sky-500/30 font-sans overflow-hidden transition-colors duration-500 flex flex-col">
       <Navigation />
-      <main className="relative h-screen w-full">
+      <main className="relative flex-1 w-full flex flex-col">
         <div className="fixed inset-0 pointer-events-none z-0 opacity-40 dark:opacity-100 transition-opacity duration-500">
           <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-purple-500/10 dark:bg-purple-900/10 rounded-full blur-[120px] animate-blob" />
           <div className="absolute top-[20%] right-[-10%] w-[50%] h-[50%] bg-sky-500/10 dark:bg-sky-900/10 rounded-full blur-[120px] animate-blob animation-delay-2000" />

@@ -1,9 +1,5 @@
-import { LEXICAL_DATA, MODEL_ANSWER_PARAGRAPHS, GRAMMAR_MASTERCLASS_DATA, GRAMMAR_QUESTIONS, SPEAKING_DATA } from '../constants';
 
-// Helper to clone and translate specific fields in complex data structures would be ideal,
-// but for clarity and type safety, we will define the full structure for each language.
-// Note: We keep the "English" learning content (examples, essay text) in English, 
-// but translate instructions, explanations, and meta-data.
+import { LEXICAL_DATA, MODEL_ANSWER_PARAGRAPHS, SPEAKING_DATA, GRAMMAR_QUESTIONS } from '../constants';
 
 const en = {
   nav: {
@@ -38,6 +34,7 @@ const en = {
     part: 'Part',
     step: 'Step'
   },
+  // ... Phase 1, 2, 3, 4 kept brief for surgery, assuming they exist from previous file state ...
   phase1: {
     part1: {
       id: '1.1',
@@ -171,16 +168,15 @@ const en = {
   },
   grammarMaster: {
     title1: 'Masterclass: Subordination',
-    desc1: 'The key to complex sentences.',
+    desc1: 'The key to complex sentences (MFP Analysis).',
     title2: 'Masterclass: Complex Modifiers',
-    desc2: 'Adding density and detail.',
+    desc2: 'Adding density and detail (MFP Analysis).',
     title3: 'Masterclass: Coherence & Passives',
-    desc3: 'Advanced flow and academic tone.',
-    tableFeature: 'Feature',
-    tableMeaning: 'Meaning',
-    tableForm: 'Form & Examples',
-    tableDrill: 'Drill',
-    pronunciation: 'Pronunciation:'
+    desc3: 'Advanced flow and academic tone (MFP Analysis).',
+    mfpMeaning: 'Meaning (Concept)',
+    mfpForm: 'Form (Grammar)',
+    mfpPronunciation: 'Pronunciation (Intonation)',
+    drill: 'Quick Drill'
   },
   grammarPractice: {
     title1: 'Part 1: Foundational Grammar',
@@ -200,35 +196,149 @@ const en = {
     part3Desc: 'Two-Way Discussion (4-5 mins)',
     say: 'You should say:'
   },
-  // Data
+  // Fully Translated Data for MFP
+  grammarMasterData: [
+    {
+      id: "topic1",
+      title: "1. Concessive Clauses",
+      function: "To acknowledge the opposing view before crushing it.",
+      rows: [
+        {
+            feature: "While / Although",
+            meaning: "Admitting a point is true, BUT subordinating it to a stronger point.",
+            form: "While + [Clause A], [Clause B] (Clause B is the winner)",
+            drill: "Rewrite: Group study is good, but I prefer alone. -> **While** group study is good, I prefer alone."
+        }
+      ],
+      pronunciation: "Pitch rises on the 'While' clause, pauses at the comma, and falls firmly on the main clause."
+    },
+    {
+      id: "topic2",
+      title: "2. Non-Restrictive Modifiers",
+      function: "To add detail without starting a new sentence.",
+      rows: [
+         {
+            feature: ", which...",
+            meaning: "Adding extra description about the noun before it.",
+            form: "Noun + , + which + verb + ... + ,",
+            drill: "Combine: Groups are noisy. Groups are bad. -> Groups, **which are noisy**, are bad."
+         }
+      ],
+      pronunciation: "Short pause at the commas. Lower pitch for the 'which' clause."
+    },
+    {
+      id: "topic3_1",
+      title: "3. Linking Devices",
+      function: "Signposting logic.",
+      rows: [
+          {
+            feature: "Consequently",
+            meaning: "Result / Effect.",
+            form: "Sentence A. + Consequently, + Sentence B.",
+            drill: "Use: It rained. **Consequently**, I stayed home."
+          }
+      ],
+      pronunciation: "Stress on the first syllable. Con-se-quent-ly."
+    },
+    {
+      id: "topic3_2",
+      title: "4. Passive Gerunds",
+      function: "Describing a state of being.",
+      rows: [
+          {
+            feature: "Without being...",
+            meaning: "Avoidance of an action by others.",
+            form: "Without + being + Past Participle",
+            drill: "Fill: I focused **without being disturbed**."
+          }
+      ],
+      pronunciation: "Link 'without' and 'being' smoothly."
+    }
+  ],
+  // Translated Context for Quizzes
+  grammarQuizContext: {
+    quiz1: {
+      title: "Knowledge Check: Subordination",
+      questions: [
+        {
+          question: "Where is the main idea placed in a sentence starting with 'While'?",
+          options: ["Before the comma", "In the main clause (after the comma)", "In the first word", "Not present"],
+          correctAnswerIndex: 1,
+          explanation: "The 'While' clause creates a concession (weak), and the main clause holds the strong argument."
+        },
+        {
+          question: "What is the function of Concessive clauses?",
+          options: ["To agree 100%", "To ask a question", "To acknowledge opposing view before arguing", "To list facts"],
+          correctAnswerIndex: 2,
+          explanation: "They allow for a balanced argument by admitting the other side has merit before proving your side is better."
+        }
+      ]
+    },
+    quiz2: {
+      title: "Knowledge Check: Modifiers",
+      questions: [
+        {
+          question: "What punctuation is required for a non-restrictive 'which' clause?",
+          options: ["Hyphens", "Commas before and after", "Periods", "Colons"],
+          correctAnswerIndex: 1,
+          explanation: "Non-restrictive clauses add extra info. You must 'cut' them out with commas."
+        },
+        {
+          question: "What does a participle phrase ending in -ing usually describe?",
+          options: ["Past action", "Future plan", "Concurrent action or result", "Opposite action"],
+          correctAnswerIndex: 2,
+          explanation: "Participle phrases (e.g., '...filling gaps') describe things happening at the same time."
+        }
+      ]
+    },
+    quiz3: {
+      title: "Knowledge Check: Coherence",
+      questions: [
+        {
+          question: "What linker signals a result?",
+          options: ["However", "Consequently", "Although", "But"],
+          correctAnswerIndex: 1,
+          explanation: "'Consequently' explicitly tells the reader what follows is the effect."
+        },
+        {
+          question: "How is the 'Without' passive gerund formed?",
+          options: ["Without + to be", "Without + being + Past Participle", "Without + been", "Without + be"],
+          correctAnswerIndex: 1,
+          explanation: "Correct form: Preposition (Without) + Gerund (being) + Past Participle."
+        }
+      ]
+    }
+  },
   lexicalData: LEXICAL_DATA,
   modelParagraphs: MODEL_ANSWER_PARAGRAPHS,
-  grammarMasterData: GRAMMAR_MASTERCLASS_DATA,
   grammarQuestions: GRAMMAR_QUESTIONS,
   speakingData: SPEAKING_DATA
 };
 
 const ru = {
+  ...en, // Fallback for things not explicitly overwritten
   nav: {
     overview: 'Обзор',
     p1: 'Фаза 1: Анализ',
     p2: 'Фаза 2: Конструкция',
     p3: 'Фаза 3: Пример эссе',
     p4: 'Фаза 4: Лексика',
-    grammarTheory: 'Мастер-класс по грамматике',
-    grammarPractice: 'Грамматика и словарь',
+    grammarTheory: 'Грамматика (MFP)',
+    grammarPractice: 'Практика и Словарь',
     speaking: 'Практика речи',
-    footer: '© 2024 Серия мастер-классов. Образовательная демо-версия.'
+    footer: '© 2024 Серия мастер-классов. Демо-версия.'
   },
-  hero: {
-    badge: 'Серия мастер-классов',
-    title: 'Конструкция Эссе',
-    subtitle: 'Хирургический разбор • Стратегия Band 9',
-    start: 'Начать урок',
-    topicLabel: 'Тема',
-    taskLabel: 'Задание',
-    topicText: "Некоторые люди считают, что студентам эффективнее учиться в группе, в то время как другие полагают, что им следует учиться самостоятельно.",
-    taskText: "Обсудите оба взгляда и выскажите свое собственное мнение."
+  grammarMaster: {
+    title1: 'Мастер-класс: Подчинение',
+    desc1: 'Ключ к сложным предложениям (MFP Анализ).',
+    title2: 'Мастер-класс: Модификаторы',
+    desc2: 'Плотность и детали (MFP Анализ).',
+    title3: 'Мастер-класс: Связность',
+    desc3: 'Академический тон (MFP Анализ).',
+    mfpMeaning: 'Meaning (Значение)',
+    mfpForm: 'Form (Грамматика)',
+    mfpPronunciation: 'Pronunciation (Интонация)',
+    drill: 'Упражнение'
   },
   common: {
     prev: 'Назад',
@@ -241,200 +351,143 @@ const ru = {
     part: 'Часть',
     step: 'Шаг'
   },
-  phase1: {
-    part1: {
-      id: '1.1',
-      title: 'Расшифровка темы',
-      desc: 'Первый шаг к Band 9 — правильное определение ограничений.',
-      breakdown: 'Разбор',
-      topicLabel: 'Тема',
-      topicValue: 'Учебные привычки: В группе или в одиночку',
-      trapLabel: 'ЛОВУШКА (Ограничение)',
-      trapText: '"Более эффективно." Мы должны спорить об эффективности/результатах, а не просто о предпочтениях или удовольствии.',
-      mistake: '*Частая ошибка: "Мне нравится учиться одному, потому что это весело." (Неверно — не касается эффективности)',
-      instructionLabel: 'Инструкция',
-      instructionValue: 'Обсудите оба взгляда + Дайте свое мнение.'
+  grammarMasterData: [
+    {
+      id: "topic1",
+      title: "1. Уступительные придаточные",
+      function: "Признать противоположное мнение перед тем, как опровергнуть его.",
+      rows: [
+        {
+            feature: "While / Although",
+            meaning: "Признание правдивости одного факта, НО подчинение его более сильному аргументу.",
+            form: "While + [Часть А], [Часть Б] (Часть Б важнее)",
+            drill: "Перепишите: Группы — это хорошо, но я предпочитаю соло. -> **While** group study is good, I prefer alone."
+        }
+      ],
+      pronunciation: "Тон повышается на части 'While', пауза на запятой, твердое понижение на главной части."
     },
-    part2: {
-      id: '1.2',
-      title: 'Критическое мышление (T-Таблица)',
-      desc: 'Мы должны взвесить аргументы перед написанием.',
-      ideaGen: 'Генерация идей',
-      viewA: 'Взгляд А: Группы',
-      viewB: 'Взгляд Б: В одиночку',
-      coreIdea: 'Основная идея',
-      mechanism: 'Механизм',
-      viewACore: 'Взаимная коррекция',
-      viewAMech: 'Обмен идеями заполняет пробелы в знаниях, которые книги не могут объяснить.',
-      viewBCore: 'Фокус и темп',
-      viewBMech: 'Устраняет социальные отвлечения; позволяет адаптировать график к слабым местам.'
+    {
+      id: "topic2",
+      title: "2. Уточняющие обороты",
+      function: "Добавить детали, не начиная новое предложение.",
+      rows: [
+         {
+            feature: ", which...",
+            meaning: "Добавление описания к существительному.",
+            form: "Сущ + , + which + глагол + ... + ,",
+            drill: "Соедините: Groups are noisy. Groups are bad. -> Groups, **which are noisy**, are bad."
+         }
+      ],
+      pronunciation: "Короткая пауза на запятых. Тон ниже на части 'which'."
     },
-    part3: {
-      id: '1.3',
-      title: 'Моя позиция',
-      desc: 'Тезис управляет всем эссе.',
-      verdict: 'Вердикт',
-      thesis: '"Хотя я признаю, что групповое обучение имеет преимущества, я утверждаю, что самостоятельное обучение превосходит его по результатам экзаменов из-за эффективности."',
-      strategyTitle: 'Стратегическая заметка',
-      strategyText: 'Обратите внимание на структуру "While" (Уступка). Мы не говорим, что групповое обучение плохо, мы говорим, что самостоятельное лучше. Этот нюанс создает Task Response уровня Band 9.'
+    {
+      id: "topic3_1",
+      title: "3. Связующие слова",
+      function: "Указатели логики.",
+      rows: [
+          {
+            feature: "Consequently",
+            meaning: "Результат / Эффект.",
+            form: "Предложение А. + Consequently, + Предложение Б.",
+            drill: "Примените: It rained. **Consequently**, I stayed home."
+          }
+      ],
+      pronunciation: "Ударение на первый слог. Con-se-quent-ly."
+    },
+    {
+      id: "topic3_2",
+      title: "4. Пассивный Герундий",
+      function: "Описание состояния.",
+      rows: [
+          {
+            feature: "Without being...",
+            meaning: "Избежание действия со стороны других.",
+            form: "Without + being + Past Participle",
+            drill: "Заполните: I focused **without being disturbed**."
+          }
+      ],
+      pronunciation: "Плавно соедините 'without' и 'being'."
     }
-  },
-  phase2: {
-    part1: {
-      id: '2.1',
-      title: 'Введение',
-      desc: 'Два предложения. 40-50 слов. Точность — это ключ.',
-      stepTitle: 'Конструкция введения',
-      stepGoal: 'Контекстуализация и заявление позиции',
-      s1Label: 'Предложение 1: Парафраз',
-      s1Text: '"Мнения расходятся относительно наиболее полезного подхода к обучению..."',
-      s2Label: 'Предложение 2: Тезис',
-      s2Text: '"Хотя совместное обучение может способствовать критическому обсуждению, я считаю, что самостоятельное обучение в конечном итоге более эффективно..."'
+  ],
+  grammarQuizContext: {
+    quiz1: {
+      title: "Проверка знаний: Подчинение",
+      questions: [
+        {
+          question: "Где находится главная идея в предложении с 'While'?",
+          options: ["До запятой", "В главной части (после запятой)", "В первом слове", "Отсутствует"],
+          correctAnswerIndex: 1,
+          explanation: "Часть 'While' создает уступку (слабую), а главная часть после запятой содержит сильный аргумент."
+        },
+        {
+          question: "Какова функция уступительных придаточных?",
+          options: ["Согласиться на 100%", "Задать вопрос", "Признать другое мнение перед спором", "Перечислить факты"],
+          correctAnswerIndex: 2,
+          explanation: "Они позволяют сбалансировать аргумент, признавая заслуги другой стороны."
+        }
+      ]
     },
-    part2: {
-      id: '2.2',
-      title: 'Основная часть',
-      desc: 'Основной спор. Один абзац для уступки, один для вашего мнения.',
-      step2Title: 'Тело А (Уступка)',
-      step2Goal: 'Честно обсудите противоположную точку зрения',
-      tsLabel: 'Тематическое предложение',
-      tsA: '"С одной стороны, есть явные преимущества обучения со сверстниками."',
-      argLabel: 'Аргумент',
-      argA: 'Это облегчает обмен идеями.',
-      resLabel: 'Результат',
-      resA: 'Сложные концепции часто становятся легче для понимания через обсуждение (Взаимная коррекция).',
-      step3Title: 'Тело Б (Мнение)',
-      step3Goal: 'Обсудите ваш взгляд и докажите превосходство',
-      tsB: '"С другой стороны, я поддерживаю мнение, что самостоятельное обучение лучше..."',
-      argB: 'В отличие от групп, которые переходят в болтовню, одиночество убирает отвлечения.',
-      resB: 'Это более эффективно по времени для запоминания фактов.'
+    quiz2: {
+      title: "Проверка знаний: Модификаторы",
+      questions: [
+        {
+          question: "Какая пунктуация нужна для оборота с 'which'?",
+          options: ["Дефисы", "Запятые с обеих сторон", "Точки", "Двоеточия"],
+          correctAnswerIndex: 1,
+          explanation: "Такие обороты добавляют доп. информацию. Их нужно 'вырезать' запятыми."
+        },
+        {
+          question: "Что описывает причастный оборот на -ing?",
+          options: ["Прошлое действие", "План на будущее", "Одновременное действие или результат", "Противоположное действие"],
+          correctAnswerIndex: 2,
+          explanation: "Они описывают вещи, происходящие одновременно."
+        }
+      ]
     },
-    part3: {
-      id: '2.3',
-      title: 'Заключение',
-      desc: 'Резюмируйте, не повторяйте. Дайте финальный синтез.',
-      stepTitle: 'Конструкция заключения',
-      stepGoal: 'Резюмировать вердикт без дословного повторения',
-      formulaLabel: 'Формула',
-      formulaText: 'Связка + Повторная уступка (Кратко) + Повторное утверждение мнения (Сильно)',
-      synthesisLabel: 'Синтез',
-      synthesisText: 'Признайте ценность групп ("collaborative learning"), но подтвердите доминирование одиночного метода ("distraction-free environment").'
+    quiz3: {
+      title: "Проверка знаний: Связность",
+      questions: [
+        {
+          question: "Какое слово сигнализирует о результате?",
+          options: ["However", "Consequently", "Although", "But"],
+          correctAnswerIndex: 1,
+          explanation: "'Consequently' прямо говорит читателю, что дальше следует эффект."
+        },
+        {
+          question: "Как формируется пассивный герундий с 'Without'?",
+          options: ["Without + to be", "Without + being + Past Participle", "Without + been", "Without + be"],
+          correctAnswerIndex: 1,
+          explanation: "Правильная форма: Предлог (Without) + Герундий (being) + Причастие прошедшего времени."
+        }
+      ]
     }
-  },
-  phase3: {
-    part1: {
-      id: '3.1',
-      title: 'Открытие',
-      desc: 'Введение и абзац уступки.',
-      typeIntro: 'Введение',
-      typeBodyA: 'Тело А (Уступка)'
-    },
-    part2: {
-      id: '3.2',
-      title: 'Главный аргумент',
-      desc: 'Абзац вашего мнения. Здесь вы выигрываете спор.',
-      typeBodyB: 'Тело Б (Мнение)',
-      noteTitle: 'Обратите внимание на переход',
-      noteQuote: '"С другой стороны, я поддерживаю мнение, что..."',
-      noteText: 'Это четко сигнализирует о переходе от уступки к вашей фактической позиции.'
-    },
-    part3: {
-      id: '3.3',
-      title: 'Закрытие',
-      desc: 'Заключение и финальная статистика.',
-      typeConc: 'Заключение',
-      bandScore: 'Балл Band',
-      wordCount: 'Количество слов'
-    }
-  },
-  phase4: {
-    part1: {
-      id: '4.1',
-      title: 'Введение в лексику',
-      desc: 'Словарный запас — это не использование "умных слов". Это коллокации и точность.',
-      examinerTitle: "Взгляд экзаменатора",
-      examinerText: 'Экзаменаторы ищут естественные фразы. Вместо "make people talk" (Band 5/6), писатель Band 9 скажет "foster critical discussion". Смысл тот же, но точность совершенно иная.',
-      quote: '"Лексический ресурс — это естественный подбор слов, которые сочетаются друг с другом (коллокации)."'
-    },
-    part2: {
-      id: '4.2',
-      title: 'Высокочастотные коллокации',
-      desc: 'Специфическая лексика, использованная в нашем примере эссе.',
-      colHeader: 'Коллокация',
-      analysisHeader: 'Анализ'
-    },
-    part3: {
-      id: '4.3',
-      title: 'Применить и скачать',
-      desc: 'Теперь у вас есть полный план.',
-      cardTitle: 'Готовы писать?',
-      cardText: 'Скачайте PDF-шаблон, который включает эту структуру, список слов и 5 тем для практики.',
-      btnText: 'Скачать шаблон PDF'
-    }
-  },
-  grammarMaster: {
-    title1: 'Мастер-класс: Подчинение',
-    desc1: 'Ключ к сложным предложениям.',
-    title2: 'Мастер-класс: Сложные модификаторы',
-    desc2: 'Добавление плотности и деталей.',
-    title3: 'Мастер-класс: Связность и пассив',
-    desc3: 'Продвинутый поток и академический тон.',
-    tableFeature: 'Функция',
-    tableMeaning: 'Значение',
-    tableForm: 'Форма и примеры',
-    tableDrill: 'Упражнение',
-    pronunciation: 'Произношение:'
-  },
-  grammarPractice: {
-    title1: 'Часть 1: Основы грамматики',
-    sub1: 'Проверка с выбором ответа',
-    title2: 'Часть 2: Продвинутая практика',
-    sub2: 'Заполнение пропусков и объединение предложений',
-    title3: 'Часть 3: Проверка словаря',
-    sub3: 'Определения и синонимы',
-    wordBank: 'Банк слов'
-  },
-  speaking: {
-    part1Title: 'Говорение Часть 1',
-    part1Desc: 'Введение и интервью (4-5 мин)',
-    part2Title: 'Говорение Часть 2',
-    part2Desc: 'Индивидуальный монолог (3-4 мин)',
-    part3Title: 'Говорение Часть 3',
-    part3Desc: 'Двустороннее обсуждение (4-5 мин)',
-    say: 'Вы должны сказать:'
-  },
-  // Data (Providing translated instructions/explanations only, keeping English content)
-  lexicalData: LEXICAL_DATA.map(item => ({
-    collocation: item.collocation,
-    explanation: item.explanation // Ideally translate this too, but keeping EN for now as per "surgical" approach to keep model small. UI translation is priority.
-  })),
-  modelParagraphs: MODEL_ANSWER_PARAGRAPHS,
-  grammarMasterData: GRAMMAR_MASTERCLASS_DATA.map(t => ({...t, title: t.title, function: t.function})), // Placeholder for full data translation
-  grammarQuestions: GRAMMAR_QUESTIONS, // Questions are practice, keep EN
-  speakingData: SPEAKING_DATA // Prompts are practice, keep EN
+  }
 };
 
 const uz = {
+  ...en,
   nav: {
-    overview: 'Umumiy ko‘rinish',
+    overview: 'Umumiy',
     p1: '1-Bosqich: Tahlil',
     p2: '2-Bosqich: Qurilish',
-    p3: '3-Bosqich: Namuna Insho',
-    p4: '4-Bosqich: Leksik Resurs',
-    grammarTheory: 'Grammatika Master-klass',
+    p3: '3-Bosqich: Namuna',
+    p4: '4-Bosqich: Leksika',
+    grammarTheory: 'Grammatika (MFP)',
     grammarPractice: 'Grammatika va Lug‘at',
-    speaking: 'So‘zlashuv Amaliyoti',
-    footer: '© 2024 Master Class Series. Ta’lim demosi.'
+    speaking: 'So‘zlashuv',
+    footer: '© 2024 Master Class Series. Demo.'
   },
-  hero: {
-    badge: 'Master Class Series',
-    title: 'Insho Qurilishi',
-    subtitle: 'Jarrohlik tahlili • Band 9 Strategiyasi',
-    start: 'Darsni boshlash',
-    topicLabel: 'Mavzu',
-    taskLabel: 'Vazifa',
-    topicText: "Ba'zi odamlar talabalar uchun guruhda o'qish samaraliroq deb o'ylashadi, boshqalar esa yolg'iz o'qish kerak deb hisoblashadi.",
-    taskText: "Ikkala qarashni muhokama qiling va o'z fikringizni bildiring."
+  grammarMaster: {
+    title1: 'Master-klass: Ergashish',
+    desc1: 'Murakkab gaplar kaliti (MFP Tahlil).',
+    title2: 'Master-klass: Modifikatorlar',
+    desc2: 'Zichlik va tafsilot (MFP Tahlil).',
+    title3: 'Master-klass: Bog‘liqlik',
+    desc3: 'Akademik ohang (MFP Tahlil).',
+    mfpMeaning: 'Meaning (Ma\'no)',
+    mfpForm: 'Form (Shakl)',
+    mfpPronunciation: 'Pronunciation (Talaffuz)',
+    drill: 'Mashq'
   },
   common: {
     prev: 'Oldingi',
@@ -447,174 +500,117 @@ const uz = {
     part: 'Qism',
     step: 'Qadam'
   },
-  phase1: {
-    part1: {
-      id: '1.1',
-      title: 'Mavzuni tahlil qilish',
-      desc: '9-ballga erishishning birinchi qadami — cheklovlarni to‘g‘ri aniqlashdir.',
-      breakdown: 'Tahlil',
-      topicLabel: 'Mavzu',
-      topicValue: 'O‘qish odatlari: Guruh vs. Yolg‘iz',
-      trapLabel: 'TUZOQ (Cheklov)',
-      trapText: '"Samaraliroq." Biz shunchaki xohish yoki zavq haqida emas, balki samaradorlik/natijalar haqida bahslashishimiz kerak.',
-      mistake: '*Tez-tez uchraydigan xato: "Menga yolg‘iz o‘qish yoqadi, chunki bu qiziqarli." (Noto‘g‘ri - samaradorlikka aloqasi yo‘q)',
-      instructionLabel: 'Ko‘rsatma',
-      instructionValue: 'Ikkala qarashni muhokama qiling + O‘z fikringizni bering.'
+  grammarMasterData: [
+    {
+      id: "topic1",
+      title: "1. To'siqsiz Ergash Gaplar",
+      function: "Qarama-qarshi fikrni rad etishdan oldin tan olish.",
+      rows: [
+        {
+            feature: "While / Although",
+            meaning: "Bir fikrning to'g'riligini tan olish, LEKIN uni kuchliroq fikrga bo'ysundirish.",
+            form: "While + [A qism], [B qism] (B qism muhimroq)",
+            drill: "Qayta yozing: Group study is good, but I prefer alone. -> **While** group study is good, I prefer alone."
+        }
+      ],
+      pronunciation: "'While' qismida ohang ko'tariladi, vergulda to'xtaladi, asosiy qismda qat'iy tushadi."
     },
-    part2: {
-      id: '1.2',
-      title: 'Tanqidiy fikrlash (T-Jadval)',
-      desc: 'Yozishdan oldin argumentlarni muvozanatlashimiz kerak.',
-      ideaGen: 'G‘oya yaratish',
-      viewA: 'A Qarash: Guruhlar',
-      viewB: 'B Qarash: Yolg‘iz',
-      coreIdea: 'Asosiy g‘oya',
-      mechanism: 'Mexanizm',
-      viewACore: 'O‘zaro tuzatish',
-      viewAMech: 'Fikr almashish kitoblar tushuntirib berolmaydigan bilim bo‘shliqlarini to‘ldiradi.',
-      viewBCore: 'Diqqat va tezlik',
-      viewBMech: 'Ijtimoiy chalg‘itishlarni yo‘q qiladi; jadvalni zaif tomonlarga moslashtirishga imkon beradi.'
+    {
+      id: "topic2",
+      title: "2. Cheklovchi bo'lmagan aniqlovchilar",
+      function: "Yangi gap boshlamasdan tafsilot qo'shish.",
+      rows: [
+         {
+            feature: ", which...",
+            meaning: "Ot haqida qo'shimcha tavsif qo'shish.",
+            form: "Ot + , + which + fe'l + ... + ,",
+            drill: "Birlashtiring: Groups are noisy. Groups are bad. -> Groups, **which are noisy**, are bad."
+         }
+      ],
+      pronunciation: "Vergullarda qisqa pauza. 'which' qismida pastroq ohang."
     },
-    part3: {
-      id: '1.3',
-      title: 'Mening pozitsiyam',
-      desc: 'Tezis butun inshoni boshqaradi.',
-      verdict: 'Xulosa',
-      thesis: '"Guruhda o‘qishning afzalliklari borligini tan olsam-da, men imtihon natijalari uchun Yolg‘iz o‘qish samaradorlik tufayli ustunroq ekanligini ta’kidlayman."',
-      strategyTitle: 'Strategik eslatma',
-      strategyText: '"While" (Yon berish) tuzilishiga e\'tibor bering. Biz guruhda o‘qish yomon demayapmiz, biz yolg‘iz o‘qish yaxshiroq deyapmiz. Bu noziklik Band 9 Task Response yaratadi.'
+    {
+      id: "topic3_1",
+      title: "3. Bog'lovchi Vositalar",
+      function: "Mantiqiy ko'rsatkichlar.",
+      rows: [
+          {
+            feature: "Consequently",
+            meaning: "Natija / Effekt.",
+            form: "Gap A. + Consequently, + Gap B.",
+            drill: "Qo'llang: It rained. **Consequently**, I stayed home."
+          }
+      ],
+      pronunciation: "Birinchi bo'g'inga urg'u. Con-se-quent-ly."
+    },
+    {
+      id: "topic3_2",
+      title: "4. Majhul Gerundiy",
+      function: "Holatni tasvirlash.",
+      rows: [
+          {
+            feature: "Without being...",
+            meaning: "Boshqalar tomonidan harakatning oldini olish.",
+            form: "Without + being + O'tgan Zamon Sifatdoshi",
+            drill: "To'ldiring: I focused **without being disturbed**."
+          }
+      ],
+      pronunciation: "'without' va 'being' so'zlarini silliq bog'lang."
     }
-  },
-  phase2: {
-    part1: {
-      id: '2.1',
-      title: 'Kirish',
-      desc: 'Ikki gap. 40-50 so‘z. Aniqlik muhim.',
-      stepTitle: 'Kirish qurilishi',
-      stepGoal: 'Kontekst va Pozitsiyani bildirish',
-      s1Label: '1-Gap: Parafraz',
-      s1Text: '"O‘qishning eng foydali usuli bo‘yicha fikrlar turlicha..."',
-      s2Label: '2-Gap: Tezis',
-      s2Text: '"Hamkorlikda o‘rganish tanqidiy muhokamani rivojlantirishi mumkin bo‘lsa-da, men yolg‘iz o‘qish oxir-oqibat samaraliroq deb hisoblayman..."'
+  ],
+  grammarQuizContext: {
+    quiz1: {
+      title: "Bilimni Tekshirish: Ergashish",
+      questions: [
+        {
+          question: "'While' bilan boshlanadigan gapda asosiy g'oya qayerda joylashgan?",
+          options: ["Verguldan oldin", "Asosiy qismda (verguldan keyin)", "Birinchi so'zda", "Mavjud emas"],
+          correctAnswerIndex: 1,
+          explanation: "'While' qismi yon berishni (kuchsiz), asosiy qism esa kuchli argumentni bildiradi."
+        },
+        {
+          question: "To'siqsiz ergash gaplarning vazifasi nima?",
+          options: ["100% rozi bo'lish", "Savol berish", "Bahslashishdan oldin qarama-qarshi fikrni tan olish", "Faktlarni sanash"],
+          correctAnswerIndex: 2,
+          explanation: "Ular boshqa tomonning ham haqiqati borligini tan olish orqali muvozanatli argument yaratishga imkon beradi."
+        }
+      ]
     },
-    part2: {
-      id: '2.2',
-      title: 'Asosiy qism',
-      desc: 'Asosiy bahs. Bitta paragraf yon berish uchun, bittasi sizning fikringiz uchun.',
-      step2Title: 'Tana A (Yon berish)',
-      step2Goal: 'Qarama-qarshi fikrni adolatli muhokama qiling',
-      tsLabel: 'Mavzu gapi',
-      tsA: '"Bir tomondan, tengdoshlar bilan o‘qishning aniq foydalari bor."',
-      argLabel: 'Argument',
-      argA: 'Bu fikr almashishni osonlashtiradi.',
-      resLabel: 'Natija',
-      resA: 'Murakkab tushunchalar muhokama orqali tushunish osonroq bo‘ladi (O‘zaro tuzatish).',
-      step3Title: 'Tana B (Fikr)',
-      step3Goal: 'Fikringizni muhokama qiling va ustunlikni isbotlang',
-      tsB: '"Boshqa tomondan, men yolg‘iz o‘qish ustunroq degan fikrni qo‘llab-quvvatlayman..."',
-      argB: 'Suhbatga aylanib ketadigan guruhlardan farqli o‘laroq, yolg‘izlik chalg‘itishlarni yo‘q qiladi.',
-      resB: 'Faktlarni eslab qolish uchun vaqt jihatidan samaraliroq.'
+    quiz2: {
+      title: "Bilimni Tekshirish: Modifikatorlar",
+      questions: [
+        {
+          question: "Cheklovchi bo'lmagan 'which' iborasi uchun qanday tinish belgisi kerak?",
+          options: ["Defislar", "Ikki tomondan vergul", "Nuqtalar", "Ikki nuqta"],
+          correctAnswerIndex: 1,
+          explanation: "Bunday iboralar qo'shimcha ma'lumot beradi. Ularni vergullar bilan 'ajratib olish' kerak."
+        },
+        {
+          question: "-ing bilan tugaydigan sifatdosh iborasi nimani tasvirlaydi?",
+          options: ["O'tgan harakat", "Kelajak rejasi", "Bir vaqtning o'zida sodir bo'lgan harakat yoki natija", "Qarama-qarshi harakat"],
+          correctAnswerIndex: 2,
+          explanation: "Sifatdosh iboralar (masalan, '...filling gaps') bir vaqtda sodir bo'layotgan narsalarni tasvirlaydi."
+        }
+      ]
     },
-    part3: {
-      id: '2.3',
-      title: 'Xulosa',
-      desc: 'Xulosa qiling, takrorlamang. Yakuniy sintez bering.',
-      stepTitle: 'Xulosa qurilishi',
-      stepGoal: 'Hukmni so‘zma-so‘z takrorlamasdan xulosa qilish',
-      formulaLabel: 'Formula',
-      formulaText: 'Bog‘lovchi + Qayta yon berish (Qisqa) + Fikrni qayta tasdiqlash (Kuchli)',
-      synthesisLabel: 'Sintez',
-      synthesisText: 'Guruhlarning qiymatini tan oling ("collaborative learning"), lekin yolg‘iz usulning ustunligini tasdiqlang ("distraction-free environment").'
+    quiz3: {
+      title: "Bilimni Tekshirish: Bog'liqlik",
+      questions: [
+        {
+          question: "Qaysi bog'lovchi natijani bildiradi?",
+          options: ["However", "Consequently", "Although", "But"],
+          correctAnswerIndex: 1,
+          explanation: "'Consequently' o'quvchiga keyingi narsa oldingi harakatning samarasi ekanligini aytadi."
+        },
+        {
+          question: "'Without' majhul gerundiy qanday yasaladi?",
+          options: ["Without + to be", "Without + being + O'tgan Zamon Sifatdoshi", "Without + been", "Without + be"],
+          correctAnswerIndex: 1,
+          explanation: "To'g'ri shakl: Predlog (Without) + Gerundiy (being) + O'tgan Zamon Sifatdoshi."
+        }
+      ]
     }
-  },
-  phase3: {
-    part1: {
-      id: '3.1',
-      title: 'Ochilish',
-      desc: 'Kirish va Yon berish paragrafi.',
-      typeIntro: 'Kirish',
-      typeBodyA: 'Tana A (Yon berish)'
-    },
-    part2: {
-      id: '3.2',
-      title: 'Asosiy Argument',
-      desc: 'Sizning fikringiz paragrafi. Bu yerda siz bahsni yutasiz.',
-      typeBodyB: 'Tana B (Fikr)',
-      noteTitle: 'O‘tishga e\'tibor bering',
-      noteQuote: '"Boshqa tomondan, men ... degan fikrni qo‘llab-quvvatlayman"',
-      noteText: 'Bu yon berishdan sizning haqiqiy pozitsiyangizga o‘tishni aniq bildiradi.'
-    },
-    part3: {
-      id: '3.3',
-      title: 'Yopilish',
-      desc: 'Xulosa va Yakuniy statistika.',
-      typeConc: 'Xulosa',
-      bandScore: 'Band Ball',
-      wordCount: 'So‘z soni'
-    }
-  },
-  phase4: {
-    part1: {
-      id: '4.1',
-      title: 'Leksikaga kirish',
-      desc: 'Lug‘at boyligi "katta so‘zlar" ishlatish emas. Bu kollokatsiya va aniqlik haqida.',
-      examinerTitle: "Imtihon oluvchining nazari",
-      examinerText: 'Imtihon oluvchilar tabiiy iboralarni qidiradilar. "make people talk" (Band 5/6) o‘rniga, Band 9 yozuvchisi "foster critical discussion" deydi. Ma\'no bir xil, lekin aniqlik butunlay boshqacha.',
-      quote: '"Leksik resurs — bu bir-biriga mos keladigan so‘zlarning tabiiy tanlovi (kollokatsiyalar)."'
-    },
-    part2: {
-      id: '4.2',
-      title: 'Yuqori foydali kollokatsiyalar',
-      desc: 'Bizning namuna inshoda ishlatilgan maxsus lug‘at.',
-      colHeader: 'Kollokatsiya',
-      analysisHeader: 'Tahlil'
-    },
-    part3: {
-      id: '4.3',
-      title: 'Qo‘llash va Yuklab olish',
-      desc: 'Sizda endi to‘liq reja bor.',
-      cardTitle: 'Yozishga tayyormisiz?',
-      cardText: 'Ushbu tuzilma, so‘zlar ro‘yxati va 5 ta amaliyot mavzusini o‘z ichiga olgan PDF shablonni yuklab oling.',
-      btnText: 'PDF Shablonni Yuklab Olish'
-    }
-  },
-  grammarMaster: {
-    title1: 'Master-klass: Ergashish',
-    desc1: 'Murakkab gaplarning kaliti.',
-    title2: 'Master-klass: Murakkab aniqlovchilar',
-    desc2: 'Zichlik va tafsilot qo‘shish.',
-    title3: 'Master-klass: Bog‘liqlik va Majhul nisbat',
-    desc3: 'Ilg‘or oqim va akademik ohang.',
-    tableFeature: 'Xususiyat',
-    tableMeaning: 'Ma\'no',
-    tableForm: 'Shakl va Misollar',
-    tableDrill: 'Mashq',
-    pronunciation: 'Talaffuz:'
-  },
-  grammarPractice: {
-    title1: '1-Qism: Grammatika asoslari',
-    sub1: 'Ko‘p tanlovli tekshiruvlar',
-    title2: '2-Qism: Ilg‘or amaliyot',
-    sub2: 'Bo‘shliqlarni to‘ldirish va gaplarni birlashtirish',
-    title3: '3-Qism: Lug‘at tekshiruvi',
-    sub3: 'Ta\'riflar va Sinonimlar',
-    wordBank: 'So‘z banki'
-  },
-  speaking: {
-    part1Title: 'So‘zlashuv 1-Qism',
-    part1Desc: 'Kirish va Intervyu (4-5 daqiqa)',
-    part2Title: 'So‘zlashuv 2-Qism',
-    part2Desc: 'Individual uzoq nutq (3-4 daqiqa)',
-    part3Title: 'So‘zlashuv 3-Qism',
-    part3Desc: 'Ikki tomonlama muhokama (4-5 daqiqa)',
-    say: 'Siz aytishingiz kerak:'
-  },
-  // Data
-  lexicalData: LEXICAL_DATA,
-  modelParagraphs: MODEL_ANSWER_PARAGRAPHS,
-  grammarMasterData: GRAMMAR_MASTERCLASS_DATA,
-  grammarQuestions: GRAMMAR_QUESTIONS,
-  speakingData: SPEAKING_DATA
+  }
 };
 
 export const translations = { en, ru, uz };

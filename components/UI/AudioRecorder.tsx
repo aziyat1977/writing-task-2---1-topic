@@ -49,13 +49,11 @@ export const AudioRecorder: React.FC = () => {
   const startRecording = async () => {
     setError(null);
     try {
-      // Check for Secure Context (HTTPS or localhost)
-      if (window.location.hostname !== 'localhost' && window.location.protocol !== 'https:') {
-        throw new Error("Microphone access requires a secure connection (HTTPS).");
-      }
+      // Manual security checks removed to allow browser to handle permissions naturally.
+      // This supports 127.0.0.1, localhost, and secure offline contexts properly.
 
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        throw new Error("Audio recording APIs are not supported in this browser.");
+        throw new Error("Audio recording APIs are not supported in this browser context.");
       }
 
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -109,6 +107,9 @@ export const AudioRecorder: React.FC = () => {
         errorMessage = "No microphone found on this device.";
       } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
         errorMessage = "Microphone is already in use by another application.";
+      } else if (err.name === 'TypeError' && err.message.includes('secure')) {
+         // Catching browser-thrown insecure context errors if they slip through
+         errorMessage = "Microphone requires HTTPS or localhost.";
       } else if (err.message) {
         errorMessage = err.message;
       }
