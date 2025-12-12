@@ -1,5 +1,3 @@
-
-
 import { LEXICAL_DATA, MODEL_ANSWER_PARAGRAPHS, SPEAKING_DATA, GRAMMAR_QUESTIONS, READING_DATA } from '../constants';
 
 const en = {
@@ -174,6 +172,8 @@ const en = {
     desc2: 'Adding density and detail (MFP Analysis).',
     title3: 'Masterclass: Coherence & Passives',
     desc3: 'Advanced flow and academic tone (MFP Analysis).',
+    title4: 'Masterclass: Relative Clauses',
+    desc4: 'Defining vs Non-Defining & Prepositions (MFP Analysis).',
     mfpMeaning: 'Meaning (Concept)',
     mfpForm: 'Form (Grammar)',
     mfpPronunciation: 'Pronunciation (Intonation)',
@@ -186,6 +186,8 @@ const en = {
     sub2: 'Gap Fill & Sentence Combining',
     title3: 'Part 3: Vocabulary Check',
     sub3: 'Definitions & Synonyms',
+    title4: 'Part 4: Relative Clauses',
+    sub4: 'Unit 20 Exercises',
     wordBank: 'Word Bank'
   },
   speaking: {
@@ -258,6 +260,38 @@ const en = {
           }
       ],
       pronunciation: "Link 'without' and 'being' smoothly."
+    },
+    {
+      id: "topic4",
+      title: "5. Relative Clauses (Unit 20)",
+      function: "Identifying nouns or adding extra description.",
+      rows: [
+          {
+            feature: "Defining vs Non-defining",
+            meaning: "Defining identifies (No commas). Non-defining adds extra info (Commas required). 'That' cannot be used in non-defining.",
+            form: "The man *who* sat... (Def) vs My dad, *who* is tall,... (Non-def)",
+            drill: "Fix: The house that I bought, is red. -> The house **that/which** I bought is red (Defining, no commas)."
+          },
+          {
+            feature: "Prepositions",
+            meaning: "Formal: Preposition + Whom/Which. Informal: Preposition at end.",
+            form: "The person *to whom* I spoke... vs The person *who* I spoke *to*...",
+            drill: "Formalize: The hotel we stayed at. -> The hotel **at which** we stayed."
+          },
+          {
+            feature: "Collocation: 'The one...'",
+            meaning: "Used to be specific or emphatic about a person or thing.",
+            form: "He is **the one who**...",
+            drill: "Specific: He suggested it. -> He is **the one who** suggested it."
+          },
+          {
+            feature: "Abstract 'Where'",
+            meaning: "Used after abstract nouns like 'situation', 'stage', or 'point'.",
+            form: "The point **where**...",
+            drill: "Fill: We reached a stage ______ we had to stop. -> **where**"
+          }
+      ],
+      pronunciation: "In non-defining clauses, the voice drops in pitch and pauses at the commas."
     }
   ],
   // Translated Context for Quizzes
@@ -316,7 +350,99 @@ const en = {
   },
   lexicalData: LEXICAL_DATA,
   modelParagraphs: MODEL_ANSWER_PARAGRAPHS,
-  grammarQuestions: GRAMMAR_QUESTIONS,
+  grammarQuestions: [
+      ...GRAMMAR_QUESTIONS,
+      // Unit 20 Exercises
+      {
+          id: 41,
+          type: 'multiple-choice',
+          category: 'Relative Clauses',
+          question: "The college has many students ______ are classed as 'mature'.",
+          options: [
+              { id: 'a', text: "who", isCorrect: true },
+              { id: 'b', text: "which", isCorrect: false },
+              { id: 'c', text: "where", isCorrect: false },
+              { id: 'd', text: "when", isCorrect: false }
+          ],
+          answerExplanation: "Use 'who' for people (students)."
+      },
+      {
+          id: 42,
+          type: 'input',
+          category: 'Relative Clauses',
+          question: "My cousin Phillip is a solicitor; he was the **one** ______ advised me to study law.",
+          correctAnswer: "who",
+          answerExplanation: "'The one who' is a common collocation for people."
+      },
+      {
+          id: 43,
+          type: 'multiple-choice',
+          category: 'Relative Clauses',
+          question: "I went to a school ______ every student wants to have.",
+          options: [
+              { id: 'a', text: "who", isCorrect: false },
+              { id: 'b', text: "which", isCorrect: true },
+              { id: 'c', text: "when", isCorrect: false },
+              { id: 'd', text: "whose", isCorrect: false }
+          ],
+          answerExplanation: "Use 'which' (or 'that') for things/places (school) acting as the object."
+      },
+      {
+          id: 44,
+          type: 'input',
+          category: 'Sentence Combination',
+          question: "Complete: 'My father lives in a house full of ornaments, ______ makes it difficult to clean.'",
+          correctAnswer: "which",
+          answerExplanation: "'Which' can refer to the whole previous clause (the fact that it is full of ornaments)."
+      },
+      {
+          id: 45,
+          type: 'multiple-choice',
+          category: 'Error Correction',
+          question: "Find the mistake: 'I want to get in touch with the woman **which** we met.'",
+          options: [
+              { id: 'a', text: "Replace 'which' with 'who'", isCorrect: true },
+              { id: 'b', text: "Replace 'which' with 'where'", isCorrect: false },
+              { id: 'c', text: "Remove 'the'", isCorrect: false }
+          ],
+          answerExplanation: "You cannot use 'which' for people. Use 'who', 'whom', or 'that'."
+      },
+      {
+          id: 46,
+          type: 'input',
+          category: 'Relative Clauses',
+          question: "The cacao tree, ______ produces a fruit, grows in the tropics.",
+          correctAnswer: "which",
+          answerExplanation: "Non-defining clause for a thing (tree) requires 'which'. 'That' is not allowed."
+      },
+      {
+          id: 47,
+          type: 'input',
+          category: 'Prepositions',
+          question: "The dried beans are transported to factories ______ they are sorted and roasted.",
+          correctAnswer: "where",
+          answerExplanation: "Use 'where' to refer to a place (factories) when something happens there."
+      },
+      {
+          id: 48,
+          type: 'multiple-choice',
+          category: 'Prepositions',
+          question: "Which sentence is more formal?",
+          options: [
+              { id: 'a', text: "The person to whom I spoke.", isCorrect: true },
+              { id: 'b', text: "The person who I spoke to.", isCorrect: false }
+          ],
+          answerExplanation: "Placing the preposition (to) before the pronoun (whom) is the formal structure."
+      },
+      {
+          id: 49,
+          type: 'input',
+          category: 'Abstract Nouns',
+          question: "We have reached the **stage** ______ we must make a decision.",
+          correctAnswer: "where",
+          answerExplanation: "'Where' is used after abstract nouns like stage, situation, or point."
+      }
+  ],
   speakingData: SPEAKING_DATA,
   readingData: READING_DATA
 };

@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { HashRouter, Routes, Route, useLocation, Link, Navigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -8,8 +7,8 @@ import { PhaseOnePart1, PhaseOnePart2A, PhaseOnePart2B, PhaseOnePart3 } from './
 import { PhaseTwoPart1, PhaseTwoPart2A, PhaseTwoPart2B, PhaseTwoPart3 } from './components/PhaseTwo';
 import { PhaseThreePart1A, PhaseThreePart1B, PhaseThreePart2, PhaseThreePart3 } from './components/PhaseThree';
 import { PhaseFourPart1, PhaseFourPart2, PhaseFourPart3 } from './components/PhaseFour';
-import { GrammarPracticePart1, GrammarPracticePart2, GrammarPracticePart3 } from './components/GrammarSection';
-import { GrammarTheoryPart1, GrammarTheoryPart2, GrammarTheoryPart3A, GrammarTheoryPart3B } from './components/GrammarMasterclass';
+import { GrammarPracticePart1, GrammarPracticePart2, GrammarPracticePart3, GrammarPracticePart4 } from './components/GrammarSection';
+import { GrammarTheoryPart1, GrammarTheoryPart2, GrammarTheoryPart3A, GrammarTheoryPart3B, GrammarTheoryPart4 } from './components/GrammarMasterclass';
 import { SpeakingPart1, SpeakingPart2, SpeakingPart3 } from './components/SpeakingSection';
 import { ReadingSection } from './components/ReadingSection';
 import { Quiz1_1, Quiz1_2, Quiz1_3, Quiz2_1, Quiz2_2, Quiz2_3, Quiz3_1, Quiz3_2, Quiz3_3, Quiz4_1, Quiz4_2, Quiz4_3, QuizGrammar1, QuizGrammar2, QuizGrammar3 } from './components/Quizzes';
@@ -165,21 +164,26 @@ const AnimatedRoutes: React.FC = () => {
 
         {/* Grammar Theory */}
         <Route path="/grammar/theory/1" element={<PageWrapper progressVal={74} prev={{ path: '/phase/4/3/quiz', label: "Quiz" }} next={{ path: '/grammar/theory/1/quiz', label: "Quiz" }}><GrammarTheoryPart1 /></PageWrapper>} />
-        <Route path="/grammar/theory/1/quiz" element={<PageWrapper progressVal={77} prev={{ path: '/grammar/theory/1', label: data.grammarMaster.title1 }} next={{ path: '/grammar/theory/2', label: data.grammarMaster.title2 }}><QuizGrammar1 /></PageWrapper>} />
+        <Route path="/grammar/theory/1/quiz" element={<PageWrapper progressVal={76} prev={{ path: '/grammar/theory/1', label: data.grammarMaster.title1 }} next={{ path: '/grammar/theory/2', label: data.grammarMaster.title2 }}><QuizGrammar1 /></PageWrapper>} />
 
-        <Route path="/grammar/theory/2" element={<PageWrapper progressVal={80} prev={{ path: '/grammar/theory/1/quiz', label: "Quiz" }} next={{ path: '/grammar/theory/2/quiz', label: "Quiz" }}><GrammarTheoryPart2 /></PageWrapper>} />
-        <Route path="/grammar/theory/2/quiz" element={<PageWrapper progressVal={83} prev={{ path: '/grammar/theory/2', label: data.grammarMaster.title2 }} next={{ path: '/grammar/theory/3/1', label: data.grammarMaster.title3 + " (1)" }}><QuizGrammar2 /></PageWrapper>} />
+        <Route path="/grammar/theory/2" element={<PageWrapper progressVal={78} prev={{ path: '/grammar/theory/1/quiz', label: "Quiz" }} next={{ path: '/grammar/theory/2/quiz', label: "Quiz" }}><GrammarTheoryPart2 /></PageWrapper>} />
+        <Route path="/grammar/theory/2/quiz" element={<PageWrapper progressVal={80} prev={{ path: '/grammar/theory/2', label: data.grammarMaster.title2 }} next={{ path: '/grammar/theory/3/1', label: data.grammarMaster.title3 + " (1)" }}><QuizGrammar2 /></PageWrapper>} />
 
         {/* Split Theory 3 */}
-        <Route path="/grammar/theory/3/1" element={<PageWrapper progressVal={86} prev={{ path: '/grammar/theory/2/quiz', label: "Quiz" }} next={{ path: '/grammar/theory/3/1', label: "Part 1" }}><GrammarTheoryPart3A /></PageWrapper>} />
-        <Route path="/grammar/theory/3/2" element={<PageWrapper progressVal={88} prev={{ path: '/grammar/theory/3/1', label: "Part 1" }} next={{ path: '/grammar/theory/3/quiz', label: "Quiz" }}><GrammarTheoryPart3B /></PageWrapper>} />
+        <Route path="/grammar/theory/3/1" element={<PageWrapper progressVal={82} prev={{ path: '/grammar/theory/2/quiz', label: "Quiz" }} next={{ path: '/grammar/theory/3/2', label: "Part 2" }}><GrammarTheoryPart3A /></PageWrapper>} />
+        <Route path="/grammar/theory/3/2" element={<PageWrapper progressVal={84} prev={{ path: '/grammar/theory/3/1', label: "Part 1" }} next={{ path: '/grammar/theory/3/quiz', label: "Quiz" }}><GrammarTheoryPart3B /></PageWrapper>} />
+        <Route path="/grammar/theory/3/quiz" element={<PageWrapper progressVal={86} prev={{ path: '/grammar/theory/3/2', label: data.grammarMaster.title3 }} next={{ path: '/grammar/theory/4', label: data.grammarMaster.title4 }}><QuizGrammar3 /></PageWrapper>} />
 
-        <Route path="/grammar/theory/3/quiz" element={<PageWrapper progressVal={89} prev={{ path: '/grammar/theory/3/2', label: data.grammarMaster.title3 }} next={{ path: '/grammar/practice/1', label: data.grammarPractice.title1 }}><QuizGrammar3 /></PageWrapper>} />
+        {/* NEW Theory 4 (Relative Clauses) */}
+        <Route path="/grammar/theory/4" element={<PageWrapper progressVal={88} prev={{ path: '/grammar/theory/3/quiz', label: "Quiz" }} next={{ path: '/grammar/practice/1', label: data.grammarPractice.title1 }}><GrammarTheoryPart4 /></PageWrapper>} />
 
         {/* Grammar Practice */}
-        <Route path="/grammar/practice/1" element={<PageWrapper progressVal={92} prev={{ path: '/grammar/theory/3/quiz', label: "Quiz" }} next={{ path: '/grammar/practice/2', label: data.grammarPractice.title2 }}><GrammarPracticePart1 /></PageWrapper>} />
-        <Route path="/grammar/practice/2" element={<PageWrapper progressVal={94} prev={{ path: '/grammar/practice/1', label: data.grammarPractice.title1 }} next={{ path: '/grammar/practice/3', label: data.grammarPractice.title3 }}><GrammarPracticePart2 /></PageWrapper>} />
-        <Route path="/grammar/practice/3" element={<PageWrapper progressVal={96} prev={{ path: '/grammar/practice/2', label: data.grammarPractice.title2 }} next={{ path: '/reading/1', label: data.nav.reading }}><GrammarPracticePart3 /></PageWrapper>} />
+        <Route path="/grammar/practice/1" element={<PageWrapper progressVal={90} prev={{ path: '/grammar/theory/4', label: data.grammarMaster.title4 }} next={{ path: '/grammar/practice/2', label: data.grammarPractice.title2 }}><GrammarPracticePart1 /></PageWrapper>} />
+        <Route path="/grammar/practice/2" element={<PageWrapper progressVal={92} prev={{ path: '/grammar/practice/1', label: data.grammarPractice.title1 }} next={{ path: '/grammar/practice/3', label: data.grammarPractice.title3 }}><GrammarPracticePart2 /></PageWrapper>} />
+        <Route path="/grammar/practice/3" element={<PageWrapper progressVal={94} prev={{ path: '/grammar/practice/2', label: data.grammarPractice.title2 }} next={{ path: '/grammar/practice/4', label: data.grammarPractice.title4 }}><GrammarPracticePart3 /></PageWrapper>} />
+        
+        {/* NEW Practice 4 (Relative Clauses Exercises) */}
+        <Route path="/grammar/practice/4" element={<PageWrapper progressVal={96} prev={{ path: '/grammar/practice/3', label: data.grammarPractice.title3 }} next={{ path: '/reading/1', label: data.nav.reading }}><GrammarPracticePart4 /></PageWrapper>} />
         
         {/* Reading */}
         <Route path="/reading/1" element={<ReadingWrapper progressVal={98} />} />
@@ -206,34 +210,20 @@ const AnimatedRoutes: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <ResponsiveProvider>
-        <GamificationProvider>
-          <LanguageProvider>
+    <ResponsiveProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <GamificationProvider>
             <HashRouter>
-              <AppContent />
+              <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-[#020617] transition-colors duration-300 font-sans text-slate-900 dark:text-slate-100">
+                  <Navigation />
+                  <AnimatedRoutes />
+              </div>
             </HashRouter>
-          </LanguageProvider>
-        </GamificationProvider>
-      </ResponsiveProvider>
-    </ThemeProvider>
-  );
-};
-
-const AppContent: React.FC = () => {
-  const { data } = useLanguage();
-  return (
-    <div className="bg-slate-50 dark:bg-[#020617] min-h-screen text-slate-800 dark:text-slate-200 selection:bg-sky-500/30 font-sans overflow-hidden transition-colors duration-500 flex flex-col">
-      <Navigation />
-      <main className="relative flex-1 w-full flex flex-col">
-        <div className="fixed inset-0 pointer-events-none z-0 opacity-40 dark:opacity-100 transition-opacity duration-500">
-          <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-purple-500/10 dark:bg-purple-900/10 rounded-full blur-[120px] animate-blob" />
-          <div className="absolute top-[20%] right-[-10%] w-[50%] h-[50%] bg-sky-500/10 dark:bg-sky-900/10 rounded-full blur-[120px] animate-blob animation-delay-2000" />
-          <div className="absolute bottom-[-20%] left-[20%] w-[50%] h-[50%] bg-indigo-500/10 dark:bg-indigo-900/10 rounded-full blur-[120px] animate-blob animation-delay-4000" />
-        </div>
-        <AnimatedRoutes />
-      </main>
-    </div>
+          </GamificationProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </ResponsiveProvider>
   );
 };
 

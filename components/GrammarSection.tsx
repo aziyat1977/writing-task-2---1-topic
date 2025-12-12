@@ -318,6 +318,12 @@ export const GrammarPracticePart2: React.FC = () => {
 
 export const GrammarPracticePart3: React.FC = () => {
   const { data } = useLanguage();
-  const questions = data.grammarQuestions.filter(q => q.id > 30);
+  const questions = data.grammarQuestions.filter(q => q.id > 30 && q.id <= 40);
   return <PracticeWizard questions={questions} title={data.grammarPractice.title3} subtitle={data.grammarPractice.sub3} />;
+};
+
+export const GrammarPracticePart4: React.FC = () => {
+  const { data } = useLanguage();
+  const questions = data.grammarQuestions.filter(q => q.id > 40);
+  return <PracticeWizard questions={questions} title={data.grammarPractice.title4} subtitle={data.grammarPractice.sub4} />;
 };

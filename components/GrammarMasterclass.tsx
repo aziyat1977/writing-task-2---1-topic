@@ -136,3 +136,18 @@ export const GrammarTheoryPart3B: React.FC = () => {
     </section>
   );
 };
+
+export const GrammarTheoryPart4: React.FC = () => {
+  const { data } = useLanguage();
+  return (
+    <section className="h-full flex flex-col justify-center max-w-5xl mx-auto px-6">
+      <FadeIn>
+        <div className="mb-6 text-center">
+           <h2 className="text-3xl font-bold text-sky-600 dark:text-sky-400 mb-2">{data.grammarMaster.title4}</h2>
+           <p className="text-slate-500 dark:text-slate-400">{data.grammarMaster.desc4}</p>
+        </div>
+        {data.grammarMasterData[4] && <MFPCard topic={data.grammarMasterData[4]} />}
+      </FadeIn>
+    </section>
+  );
+};
